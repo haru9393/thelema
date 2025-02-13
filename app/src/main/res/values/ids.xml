@@ -1,0 +1,6 @@
+<resources>
+    <item name="main_layout_nuevo" type="id" />
+    <item name="scrollView" type="id" />
+    <item name="themesContainer" type="id" />
+    <item name="textViewListenVerse" type="id">ViewListenVerse</item>
+</resources>

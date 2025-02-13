@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="thelema_red">#D32F2F</color>   <!-- Rojo -->
+    <color name="thelema_black">#000000</color>   <!-- Negro -->
+    <color name="thelema_gold">#FFD700</color>   <!-- Oro -->
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="golden">#FFD700</color>
+</resources>

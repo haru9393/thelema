@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Toolbar -->
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="0dp"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/thelema_escarlata"
+        android:elevation="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Botones -->
+    <LinearLayout
+        android:id="@+id/buttonsContainer"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:padding="16dp"
+        android:layout_marginTop="?attr/actionBarSize"
+        style="?android:attr/buttonBarStyle"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <Button
+            android:id="@+id/buttonLiberAlVelLegis"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:padding="12dp"
+            android:minWidth="120dp"
+            android:maxWidth="180dp"
+            android:background="@drawable/boton_thelema"
+            android:text="@string/liber_al_vel_legis"
+            android:textAllCaps="false"
+            android:textColor="@color/thelema_dorado"
+            style="?android:attr/buttonBarButtonStyle"/>
+
+        <Button
+            android:id="@+id/buttonLiberIi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:padding="12dp"
+            android:minWidth="120dp"
+            android:maxWidth="180dp"
+            android:background="@drawable/boton_thelema"
+            android:text="@string/liber_ii"
+            android:textAllCaps="false"
+            android:textColor="@color/thelema_dorado"
+            style="?android:attr/buttonBarButtonStyle"/>
+
+        <Button
+            android:id="@+id/buttonLiberTzaddi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:padding="12dp"
+            android:minWidth="150dp"
+            android:maxWidth="200dp"
+            android:background="@drawable/boton_thelema"
+            android:text="@string/liber_tzaddi"
+            android:textAllCaps="false"
+            android:textColor="@color/thelema_dorado"
+            android:ellipsize="end"
+            android:maxLines="1"
+            style="?android:attr/buttonBarButtonStyle"/>
+    </LinearLayout>
+
+    <!-- Botón para Temas y Versículos -->
+    <Button
+        android:id="@+id/buttonThemes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:padding="12dp"
+        android:text="@string/themes_and_verses"
+        android:textAllCaps="false"
+        android:background="@drawable/boton_thelema"
+        android:textColor="@color/thelema_dorado"
+        app:layout_constraintTop_toBottomOf="@+id/buttonsContainer"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <!-- Botón para Oraciones y Rituales -->
+    <Button
+        android:id="@+id/buttonOraciones"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:padding="12dp"
+        android:text="@string/oraciones_y_rituales"
+        android:textAllCaps="false"
+        android:background="@drawable/boton_thelema"
+        android:textColor="@color/thelema_dorado"
+        app:layout_constraintTop_toBottomOf="@+id/buttonThemes"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <!-- Instrucciones -->
+    <TextView
+        android:id="@+id/instructionText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:text="@string/instruction_text"
+        android:textSize="16sp"
+        android:textColor="#000000"
+        app:layout_constraintTop_toBottomOf="@+id/buttonOraciones"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- themesContainer -->
+    <LinearLayout
+        android:id="@+id/themesContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp"
+        app:layout_constraintTop_toBottomOf="@+id/instructionText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <!-- Contenedor de Oraciones y Rituales -->
+    <LinearLayout
+        android:id="@+id/oracionesContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@+id/instructionText">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/oraciones_y_rituales"/>
+    </LinearLayout>
+
+    <!-- ScrollView -->
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintTop_toBottomOf="@+id/themesContainer"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:textSize="18sp"
+            android:textColor="@android:color/black"/>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+

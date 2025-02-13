@@ -1,0 +1,34 @@
+<resources>
+    <string name="app_name">Thelema App</string>
+    <string name="select_book">Selecciona un libro</string>
+    <string name="scroll_for_books">Lista de libros disponibles</string>
+    <string name="scroll_for_verses">Contenido del libro</string>
+    <string name="select_chapter_title">Selecciona un capítulo</string>
+    <string name="chapter_title_description">Título del capítulo</string>
+    <string name="scroll_for_chapter">Lista de capítulos</string>
+    <string name="contenido_del_libro">Contenido del libro</string>
+    <string name="contenido_largo_libro">Contenido largo del libro</string>
+    <string name="add_to_favorites">Añadir a favoritos</string>
+    <string name="example_verse">Ejemplo de versículo</string>
+    <string name="back_button">Volver</string>
+    <string name="background_image_description">Imagen de fondo para la cita</string>
+    <string name="selecciona_un_tema">Selecciona un tema</string>
+    <string name="t_tulo_de_la_secci_n_de_temas">Título de la sección de temas</string>
+    <string name="selecciona_un_tema_para_ver_un_vers_culo">Selecciona un tema para ver un versículo</string>
+
+    <string name="no_verse_found_for_theme">No se encontró un versículo para el tema: %s…</string>
+    <string name="verse_not_available_yet">Versículo no disponible por el momento…</string>
+    <string name="error_loading_data">Error al cargar los datos…</string>
+    <string name="favorites">Favoritos</string>
+    <string name="remove_from_favorites">Eliminar de favoritos</string>
+    <string name="settings">Ajustes</string>
+    <string name="about">Acerca de</string>
+    <string name="search">Buscar</string>
+    <string name="search_hint">Buscar en los libros…</string>
+    <string name="no_results">No se encontraron resultados…</string>
+    <string name="loading">Cargando…</string>
+    <string name="next_chapter">Siguiente capítulo</string>
+    <string name="previous_chapter">Capítulo anterior</string>
+    <string name="verse_for_theme">Versículo para %s</string>
+    <string name="themes_button_text">Temas</string>
+</resources>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Tema personalizado basado en AppCompat -->
+    <style name="Theme.ThelemaApp" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@color/thelema_red</item>
+        <item name="colorPrimaryDark">@color/thelema_black</item>
+        <item name="colorAccent">@color/thelema_gold</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+</resources>
