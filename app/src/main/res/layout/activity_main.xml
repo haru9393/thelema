@@ -110,7 +110,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:text="@string/instruction_text"
+        android:text="@string/toca_un_versículo_para_escucharlo"
         android:textSize="16sp"
         android:textColor="#000000"
         app:layout_constraintTop_toBottomOf="@+id/buttonOraciones"
@@ -136,7 +136,9 @@
         android:orientation="vertical"
         android:padding="16dp"
         android:visibility="gone"
-        app:layout_constraintTop_toBottomOf="@+id/instructionText">
+        app:layout_constraintTop_toBottomOf="@+id/instructionText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
         <TextView
             android:layout_width="wrap_content"
@@ -165,4 +167,3 @@
     </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
-
