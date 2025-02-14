@@ -6,15 +6,14 @@ plugins {
 
 android {
     namespace = "com.example.thelema"
-    compileSdk = 34 // Asegúrate de que compileSdk esté actualizado a 34
+    compileSdk = 35  // Updated to API 35 (Android 15 Beta)
 
     defaultConfig {
         applicationId = "com.example.thelema"
-        minSdk = 34
-        targetSdk = 34 // Apunta a Android 14 (API 34) para cumplir con las políticas de Google Play
+        minSdk = 34  // Keeping minSdk at 34 for compatibility
+        targetSdk = 35  // Targeting the latest Android 15 Beta
         versionCode = 1
         versionName = "1.0"
-
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -41,35 +40,30 @@ android {
         compose = true
     }
 
-    // Build Tools version opcional (no siempre es necesario, pero ayuda a evitar algunos problemas)
-    buildToolsVersion = "34.0.0" // Asegúrate de tener la versión de buildTools correcta instalada
+    buildToolsVersion = "35.0.0"  // Ensuring the latest build tools are used
 }
 
 dependencies {
-    // Librerías principales
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
-    implementation(platform(libs.androidx.compose.bom)) // BOM para gestionar versiones de Compose
+    implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.ui)
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
     implementation(libs.androidx.appcompat)
 
-    // Dependencias de pruebas
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.ui.test.junit4)
 
-    // Dependencias de debug
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 
-    // Librerías adicionales
     implementation(libs.androidx.constraintlayout)
-    implementation(libs.material) // Usa la versión más reciente de Material Components
-    implementation(libs.androidx.work.runtime.ktx) // Para WorkManager
+    implementation(libs.material)
+    implementation(libs.androidx.work.runtime.ktx)
 }
