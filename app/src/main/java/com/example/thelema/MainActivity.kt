@@ -197,11 +197,13 @@ class MainActivity : AppCompatActivity() {
     )
 
 
-    // 3. Define preguntas frecuentes (este es un ejemplo - reemplázalo con tus preguntas)
     private val preguntasFrecuentes = mapOf(
-        "Pregunta 1" to "Respuesta 1...",
-        "Pregunta 2" to "Respuesta 2...",
-        // ... más preguntas
+        "¿Es Thelema satánica?" to "No, Thelema no es una religión satánica. Es una filosofía espiritual y un sistema de creencias que promueve la libertad personal y el auto-descubrimiento.",
+        "¿Se realizan sacrificios en Thelema?" to "No, en Thelema no se practican sacrificios. Thelema se enfoca en la evolución personal y el respeto por la libertad y la voluntad de los demás.",
+        "¿Thelema está relacionada con la magia negra?" to "No, Thelema no es magia negra. Es una corriente filosófica que utiliza la magia ceremonial como herramienta para alcanzar el autoconocimiento, siempre con respeto y responsabilidad.",
+        "¿Thelema es una religión?" to "Thelema no se considera una religión en el sentido tradicional. Es más una filosofía o sistema de creencias espirituales, con un enfoque en la libertad y el cumplimiento de la propia voluntad.",
+        "¿Puedo practicar Thelema si soy de otra religión?" to "Sí, Thelema es compatible con diversas creencias y prácticas espirituales, siempre que se respete la libertad y la voluntad de cada individuo.",
+        "¿Se hacen orgías en Thelema?" to "No, en Thelema no se promueven ni se practican orgías. Thelema se centra en la libertad individual, el auto-descubrimiento y el respeto por los demás."
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
