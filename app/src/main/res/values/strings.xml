@@ -14,7 +14,6 @@
     <string name="liber_tzaddi_content">Contenido de Liber Tzaddi…</string>
 
     <string name="titulo_capitulos">¡Capítulos!</string>
-    <string name="chapter_title">Capítulo %d</string>
     <string name="select_verse">Selecciona un versículo</string>
 
     <string name="oraciones_y_rituales">Oraciones y Rituales</string>
@@ -62,5 +61,7 @@
         <string name="button_oraciones">Oraciones</string>
         <string name="button_preguntas">Preguntas</string>
         <string name="button_themes">Themes</string>
+    <string name="chapter_title">Capítulo: %1$s</string>
+    <string name="no_content_available">No hay contenido disponible para este libro.</string>
 
 </resources>

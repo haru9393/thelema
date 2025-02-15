@@ -28,18 +28,7 @@
             android:background="@drawable/boton_thelema"
             android:textColor="@color/thelema_dorado"
             style="?android:attr/buttonBarButtonStyle"/>
-        <Button
-            android:id="@+id/buttonLiberAl"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/button_liber_al"
-            android:layout_margin="8dp"
-            android:padding="12dp"
-            android:minWidth="120dp"
-            android:maxWidth="180dp"
-            android:background="@drawable/boton_thelema"
-            android:textColor="@color/thelema_dorado"
-            style="?android:attr/buttonBarButtonStyle"/>
+
         <Button
             android:id="@+id/buttonLiberII"
             android:layout_width="wrap_content"
@@ -52,6 +41,7 @@
             android:background="@drawable/boton_thelema"
             android:textColor="@color/thelema_dorado"
             style="?android:attr/buttonBarButtonStyle"/>
+
         <Button
             android:id="@+id/buttonLiberTzaddi"
             android:layout_width="wrap_content"
@@ -64,6 +54,7 @@
             android:background="@drawable/boton_thelema"
             android:textColor="@color/thelema_dorado"
             style="?android:attr/buttonBarButtonStyle"/>
+
         <Button
             android:id="@+id/buttonOraciones"
             android:layout_width="wrap_content"
@@ -76,6 +67,7 @@
             android:background="@drawable/boton_thelema"
             android:textColor="@color/thelema_dorado"
             style="?android:attr/buttonBarButtonStyle"/>
+
         <Button
             android:id="@+id/buttonPreguntas"
             android:layout_width="wrap_content"
@@ -88,6 +80,7 @@
             android:background="@drawable/boton_thelema"
             android:textColor="@color/thelema_dorado"
             style="?android:attr/buttonBarButtonStyle"/>
+
         <Button
             android:id="@+id/buttonThemes"
             android:layout_width="wrap_content"
@@ -134,21 +127,11 @@
         android:visibility="gone"/>
 
     <LinearLayout
-        android:id="@+id/chaptersLiberAl"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@id/chaptersLiberAlVelLegis"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:visibility="gone"/>
-
-    <LinearLayout
         android:id="@+id/chaptersLiberII"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@id/chaptersLiberAl"
+        app:layout_constraintTop_toBottomOf="@id/chaptersLiberAlVelLegis"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:visibility="gone"/>
@@ -163,6 +146,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:visibility="gone"/>
 
+    <!-- Contenedor para versículos -->
+    <LinearLayout
+        android:id="@+id/versesContainer"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@id/chaptersLiberTzaddi"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:visibility="gone"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
 
 

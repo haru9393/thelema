@@ -205,14 +205,12 @@ class MainActivity : AppCompatActivity() {
         "¿Puedo practicar Thelema si soy de otra religión?" to "Sí, Thelema es compatible con diversas creencias y prácticas espirituales, siempre que se respete la libertad y la voluntad de cada individuo.",
         "¿Se hacen orgías en Thelema?" to "No, en Thelema no se promueven ni se practican orgías. Thelema se centra en la libertad individual, el auto-descubrimiento y el respeto por los demás."
     )
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         // Encuentra los elementos de la vista
         val buttonLiberAlVelLegis = findViewById<Button>(R.id.buttonLiberAlVelLegis)
-        val buttonLiberAl = findViewById<Button>(R.id.buttonLiberAl)
         val buttonLiberII = findViewById<Button>(R.id.buttonLiberII)
         val buttonLiberTzaddi = findViewById<Button>(R.id.buttonLiberTzaddi)
         val buttonOraciones = findViewById<Button>(R.id.buttonOraciones)
@@ -224,10 +222,15 @@ class MainActivity : AppCompatActivity() {
         textView.movementMethod = ScrollingMovementMethod()  // Habilitar desplazamiento del texto
 
         // Configuración de los botones
-        buttonLiberAlVelLegis.setOnClickListener { showChapters("Liber AL vel Legis", findViewById(R.id.chaptersLiberAlVelLegis)) }
-        buttonLiberAl.setOnClickListener { showChapters("Liber AL", findViewById(R.id.chaptersLiberAl)) }
-        buttonLiberII.setOnClickListener { showChapters("Liber II", findViewById(R.id.chaptersLiberII)) }
-        buttonLiberTzaddi.setOnClickListener { showChapters("Liber Tzaddi", findViewById(R.id.chaptersLiberTzaddi)) }
+        buttonLiberAlVelLegis.setOnClickListener {
+            showChapters("Liber AL vel Legis", findViewById(R.id.chaptersLiberAlVelLegis))
+        }
+        buttonLiberII.setOnClickListener {
+            showChapters("Liber II", findViewById(R.id.chaptersLiberII))
+        }
+        buttonLiberTzaddi.setOnClickListener {
+            showChapters("Liber Tzaddi", findViewById(R.id.chaptersLiberTzaddi))
+        }
 
         buttonOraciones.setOnClickListener { showContent(getOracionesContent()) }
         buttonPreguntas.setOnClickListener { showContent(getPreguntasFrecuentesContent()) }
@@ -242,28 +245,48 @@ class MainActivity : AppCompatActivity() {
         // Obtener el contenido del libro
         val book = bookContentData[bookName]
 
-        // Agregar los botones de los capítulos
-        book?.forEach { (chapter, _) ->
-            val button = Button(this)
-            button.text = chapter
-            button.setOnClickListener { showVerses(bookName, chapter) }
-            chaptersContainer.addView(button)
-        }
+        if (book != null) {
+            // Agregar los botones de los capítulos
+            book.forEach { (chapter, verses) ->
+                val chapterButton = Button(this)
+                chapterButton.text = chapter
+                chapterButton.setOnClickListener {
+                    showVerses(chapter, verses)  // Mostrar versículos del capítulo
+                }
+                chaptersContainer.addView(chapterButton)  // Añadir el botón al contenedor
+            }
 
-        // Mostrar el contenedor de capítulos
-        chaptersContainer.visibility = View.VISIBLE
-        showContent("")  // Limpiar cualquier contenido previo
+            // Hacer visible el contenedor de capítulos
+            chaptersContainer.visibility = View.VISIBLE
+            showContent("")  // Limpiar cualquier contenido previo
+        } else {
+            // Si no hay contenido para el libro, mostrar un mensaje
+            showContent(getString(R.string.no_content_available))  // Usamos el string de recursos para mensaje
+        }
     }
 
-    private fun showVerses(bookName: String, chapter: String) {
-        val verses = bookContentData[bookName]?.get(chapter)
-        val content = StringBuilder()
+    private fun showVerses(chapter: String, verses: Map<String, String>) {
+        val versesContainer = findViewById<LinearLayout>(R.id.versesContainer)
+        versesContainer.removeAllViews()  // Limpiar cualquier vista previa
 
-        verses?.forEach { (verse, text) ->
-            content.append("$verse: $text\n")
+        // Mostrar el capítulo como título, usando un recurso de cadena para la localización
+        val chapterTitle = TextView(this)
+        chapterTitle.text = getString(R.string.chapter_title, chapter)  // Usamos un recurso de cadena para "Capítulo: "
+        versesContainer.addView(chapterTitle)
+
+        // Agregar los botones de los versículos
+        verses.forEach { (verse, text) ->
+            val verseButton = Button(this)
+            verseButton.text = getString(R.string.verse_format, verse, text)  // Usamos el recurso para los versículos
+            verseButton.setOnClickListener {
+                showContent(getString(R.string.verse_format, verse, text))  // Muestra el versículo al presionar
+            }
+            versesContainer.addView(verseButton)  // Añadir el botón del versículo
         }
 
-        showContent(content.toString())  // Mostrar los versículos en el ScrollView
+        // Hacer visible el contenedor de versículos
+        versesContainer.visibility = View.VISIBLE
+        showContent("")  // Limpiar cualquier contenido previo
     }
 
     private fun showContent(content: String, container: LinearLayout? = null) {
