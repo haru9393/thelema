@@ -2,6 +2,7 @@ package com.example.thelema
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.AdapterView
 import android.widget.Button
 import android.widget.ListView
@@ -37,18 +38,19 @@ class ThemesActivity : AppCompatActivity() {
     private lateinit var buttonBack: Button
     private lateinit var buttonShare: Button
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_themes)
 
         verseTextView = findViewById(R.id.verseTextView)
         themesListView = findViewById(R.id.themesListView)
-        buttonBack = findViewById(R.id.buttonBack) // Inicializa buttonBack
-        buttonShare = findViewById(R.id.buttonShare) // Inicializa buttonShare
+        buttonBack = findViewById(R.id.buttonBack)
+        buttonShare = findViewById(R.id.buttonShare)
 
+        Log.d("ThemesActivity", "Lista de temas: $themes") // Imprime la lista de temas
+        Log.d("ThemesActivity", "Claves del mapa Verses: ${verses.keys}") // Imprime las claves de verses
 
-        val adapter = ThemesAdapter(this, android.R.layout.simple_list_item_2, themes)
+        val adapter = ThemesAdapter(this, themes) // Usa el nuevo constructor
         themesListView.adapter = adapter
 
         themesListView.onItemClickListener = AdapterView.OnItemClickListener { _, _, position, _ ->

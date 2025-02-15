@@ -1,15 +1,15 @@
 package com.example.thelema
 
 import android.content.Context
-import android.text.TextUtils // Importa TextUtils
+import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.TextView
 
-class ThemesAdapter(context: Context, resource: Int, objects: List<String>) :
-    ArrayAdapter<String>(context, resource, objects) {
+class ThemesAdapter(context: Context, objects: List<String>) :
+    ArrayAdapter<String>(context, android.R.layout.simple_list_item_2, objects) {
 
     private val verses = mapOf(
         "Amor" to "Amor es la ley, amor bajo voluntad. (Liber AL vel Legis 1:57)",
@@ -33,18 +33,17 @@ class ThemesAdapter(context: Context, resource: Int, objects: List<String>) :
         val theme = getItem(position)
         val verse = verses[theme] ?: "No hay versículo disponible"
 
-        val text1 = view.findViewById<TextView>(android.R.id.text1)
-        val text2 = view.findViewById<TextView>(android.R.id.text2)
+        val themeTextView = view.findViewById<TextView>(android.R.id.text1)
+        val verseTextView = view.findViewById<TextView>(android.R.id.text2)
 
-        text1.text = theme
-        text2.text = verse
+        themeTextView.text = theme
+        verseTextView.text = verse
 
-        text1.textSize = 16f
-        text2.textSize = 14f
-        text1.maxLines = 1
-        text2.maxLines = 1
-        text1.ellipsize = TextUtils.TruncateAt.END // Usa TextUtils.TruncateAt.END
-        text2.ellipsize = TextUtils.TruncateAt.END // Usa TextUtils.TruncateAt.END
+        // Limitar número de líneas y añadir "..." si el texto es demasiado largo
+        themeTextView.maxLines = 1
+        themeTextView.ellipsize = TextUtils.TruncateAt.END
+        verseTextView.maxLines = 2 // Puedes ajustar este número
+        verseTextView.ellipsize = TextUtils.TruncateAt.END
 
         return view
     }
