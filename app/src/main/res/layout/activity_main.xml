@@ -179,3 +179,6 @@
                 android:lineSpacingExtra="4dp"
                 android:gravity="center"/>
         </LinearLayout>
+    </ScrollView> <!-- Cierre del ScrollView -->
+
+</androidx.constraintlayout.widget.ConstraintLayout> <!-- Cierre del ConstraintLayout -->

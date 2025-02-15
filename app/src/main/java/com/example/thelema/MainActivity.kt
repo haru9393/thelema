@@ -195,11 +195,10 @@ class MainActivity : AppCompatActivity() {
     """.trimIndent())
     )
 
-    // Lista de preguntas frecuentes
-    private val preguntasFrecuentes = listOf(
-        Pair("¿Qué es Thelema?", "Thelema es una filosofía espiritual basada en la ley de la voluntad."),
-        Pair("¿Cómo practicar Thelema?", "La práctica de Thelema implica seguir tu propia voluntad..."),
-        // Otras preguntas...
+    private val preguntasFrecuentes = mapOf( // Changed to Map for easier access
+        "Pregunta 1" to "Respuesta 1",
+        "Pregunta 2" to "Respuesta 2"
+        // ... more preguntas
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -207,37 +206,31 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val buttonLiberAlVelLegis = findViewById<Button>(R.id.buttonLiberAlVelLegis)
+        val buttonLiberAl = findViewById<Button>(R.id.buttonLiberAl)
         val buttonLiberII = findViewById<Button>(R.id.buttonLiberII)
         val buttonLiberTzaddi = findViewById<Button>(R.id.buttonLiberTzaddi)
-        val buttonOraciones = findViewById<Button>(R.id.buttonOraciones)
-        val buttonPreguntas = findViewById<Button>(R.id.buttonPreguntas)
+        val buttonOraciones = findViewById<Button>(R.id.buttonOraciones) // Correct ID
+        val buttonPreguntas = findViewById<Button>(R.id.buttonPreguntas) // Correct ID
         val buttonThemes = findViewById<Button>(R.id.buttonThemes)
         val scrollView = findViewById<ScrollView>(R.id.scrollView)
         val textView = findViewById<TextView>(R.id.textView)
-        val chaptersContainer = findViewById<LinearLayout>(R.id.chaptersContainer)
 
         textView.movementMethod = ScrollingMovementMethod()
 
-        // Funcionalidad de los botones de libros
-        buttonLiberAlVelLegis.setOnClickListener { showChapters("Liber AL vel Legis") }
-        buttonLiberII.setOnClickListener { showChapters("Liber II") }
-        buttonLiberTzaddi.setOnClickListener { showChapters("Liber Tzaddi") }
+        buttonLiberAlVelLegis.setOnClickListener { showChapters("Liber AL vel Legis", findViewById(R.id.chaptersLiberAlVelLegis)) } // Correct ID
+        buttonLiberAl.setOnClickListener { showChapters("Liber AL", findViewById(R.id.chaptersLiberAl)) } // Correct ID
+        buttonLiberII.setOnClickListener { showChapters("Liber II", findViewById(R.id.chaptersLiberII)) } // Correct ID
+        buttonLiberTzaddi.setOnClickListener { showChapters("Liber Tzaddi", findViewById(R.id.chaptersLiberTzaddi)) } // Correct ID
 
-        // Funcionalidad de los botones principales
         buttonOraciones.setOnClickListener { showContent(getOracionesContent()) }
         buttonPreguntas.setOnClickListener { showContent(getPreguntasFrecuentesContent()) }
-        buttonThemes.setOnClickListener { showContent("Aquí irán los temas y versículos") } // TODO: Implementar
+        buttonThemes.setOnClickListener { showContent("Aquí irán los temas y versículos", findViewById(R.id.themesContainer)) } // Correct ID
 
-        // Ocultar el contenedor de capítulos al principio
-        chaptersContainer.visibility = View.GONE
-
-        // Ocultar ScrollView al principio
-        scrollView.visibility = View.GONE
+        scrollView.visibility = View.GONE // Hide initially
     }
 
-    private fun showChapters(bookName: String) {
-        val chaptersContainer = findViewById<LinearLayout>(R.id.chaptersContainer)
-        chaptersContainer.removeAllViews() // Limpiar botones anteriores
+    private fun showChapters(bookName: String, chaptersContainer: LinearLayout) {  // Correct parameter type
+        chaptersContainer.removeAllViews()
         val book = bookContentData[bookName]
 
         book?.forEach { (chapter, _) ->
@@ -248,7 +241,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         chaptersContainer.visibility = View.VISIBLE
-        showContent("") // Ocultar el contenido anterior
+        showContent("")
     }
 
     private fun showVerses(bookName: String, chapter: String) {
@@ -262,33 +255,30 @@ class MainActivity : AppCompatActivity() {
         showContent(content.toString())
     }
 
-    private fun showContent(content: String) {
+    private fun showContent(content: String, container: LinearLayout? = null) {
         val scrollView = findViewById<ScrollView>(R.id.scrollView)
         val textView = findViewById<TextView>(R.id.textView)
 
         textView.text = content
         scrollView.visibility = View.VISIBLE
+        container?.visibility = View.VISIBLE // Show container if provided
     }
 
     private fun getOracionesContent(): String {
         val content = StringBuilder()
-
         oraciones.forEach { (title, text) ->
             content.append("$title\n")
             content.append("$text\n\n")
         }
-
         return content.toString()
     }
 
     private fun getPreguntasFrecuentesContent(): String {
         val content = StringBuilder()
-
         preguntasFrecuentes.forEach { (question, answer) ->
             content.append("Pregunta: $question\n")
             content.append("Respuesta: $answer\n\n")
         }
-
         return content.toString()
     }
 }
