@@ -106,7 +106,6 @@ class OracionesActivity : AppCompatActivity() {
         "Gracias, Ángel Guardián, por tu protección. Que este ritual se cierre con bendiciones y claridad."
     """.trimIndent())
         )
-
         // Establecer el listener para el botón de Oraciones y Rituales
         buttonOraciones.setOnClickListener {
             // Asegúrate de que las vistas estén inicializadas correctamente
@@ -125,6 +124,9 @@ class OracionesActivity : AppCompatActivity() {
                         // Al hacer clic en un botón, mostrar el contenido en el TextView
                         textViewContenido.visibility = View.VISIBLE
                         textViewContenido.text = contenido
+
+                        // Agregar un Log para depurar
+                        android.util.Log.d("Oraciones", "Mostrando contenido: $contenido")
                     }
                 }
                 containerOraciones.addView(button)
