@@ -29,8 +29,7 @@
     <string name="titulo_oracion">Título de la Oración</string>
     <string name="contenido_oracion">Contenido de la Oración…</string>
     <string name="instruction_text">Toca un versículo para escucharlo.</string>
-    <string name="toca_el_versiculo_para_escucharlo">Toca el versículo para escucharlo</string>
-    <string name="toca_un_versiculo_para_escucharlo">Toca un versículo para escucharlo</string>
+    <string name="toca_un_versículo_para_escucharlo">Toca un versículo para escucharlo</string>
     <string name="titulo_de_la_oracion">Título de la Oración</string>
     <string name="contenido_de_la_oracion">Contenido de la Oración</string>
 </resources>
