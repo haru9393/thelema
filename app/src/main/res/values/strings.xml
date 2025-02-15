@@ -27,7 +27,7 @@
     <string name="compartir">Compartir</string>
     <string name="compartir_versiculo">Compartir versículo</string>
     <string name="selecciona_versiculo_primero">Selecciona un versículo antes de compartir</string>
-    <string name="mensaje_compartir"> %1$s \n\nDescarga la app de Thelema </string>
+    <string name="mensaje_compartir">%1$s \n\nDescarga la app de Thelema 📲</string>
     <string name="compartir_con">Compartir versículo con:</string>
     <string name="compartir_como_imagen">Compartir como imagen</string>
 
@@ -43,18 +43,24 @@
     <string name="descriptive_text_for_screen_reader">Botón para acceder a las oraciones y rituales</string>
     <string name="themes_and_verses">Temas y Versículos</string>
     <string name="toca_un_versículo_para_escucharlo">Toca un versículo para escucharlo</string>
-    <string name="titulo_de_la_oracion">Título de la Oración</string>
-    <string name="contenido_de_la_oracion">Contenido de la Oración</string>
-    <string name="back">Volver</string>
-    <string name="share">Compartir</string>
-    <string name="share_verse">Compartir versículo</string>
-    <string name="share_message">📖 %1$s \n\nDescarga la app de Thelema 📲</string>
-    <string name="share_with">Compartir versículo con:</string>
-    <string name="select_verse_first">Selecciona un versículo antes de compartir</string>
-    <string name="contenido_oraciones_y_rituales">contenido_oraciones_y_rituales</string>
-    <string name="regresar">regresar</string>
-    <string name="liber_al">liber_al</string>
+
+    <string name="contenido_oraciones_y_rituales">Contenido de oraciones y rituales…</string>
+    <string name="regresar">Regresar</string>
+    <string name="liber_al">Liber AL</string>
     <string name="oraciones">Oraciones</string>
     <string name="preguntas_frecuentes">Preguntas Frecuentes</string>
+    <string name="titulo_de_la_oracion">titulo_de_la_oracion</string>
+    <string name="contenido_de_la_oracion">contenido_de_la_oracion</string>
     <string name="preguntas">preguntas</string>
+    <string name="share">share</string>
+    <string name="back">back</string>
+    <string name="example_button_text">Example Button</string>
+        <string name="button_liber_al_vel_legis">Liber AL vel Legis</string>
+        <string name="button_liber_al">Liber AL</string>
+        <string name="button_liber_ii">Liber II</string>
+        <string name="button_liber_tzaddi">Liber Tzaddi</string>
+        <string name="button_oraciones">Oraciones</string>
+        <string name="button_preguntas">Preguntas</string>
+        <string name="button_themes">Themes</string>
+
 </resources>
