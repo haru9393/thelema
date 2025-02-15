@@ -149,13 +149,8 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
             startActivity(intent)
         }
 
-        // Modificación: Ahora el botón muestra u oculta el contenedor en lugar de abrir otra Activity
         buttonOraciones.setOnClickListener {
-            oracionesContainer.visibility = if (oracionesContainer.visibility == View.GONE) {
-                View.VISIBLE
-            } else {
-                View.GONE
-            }
+            oracionesContainer.visibility = if (oracionesContainer.visibility == View.GONE) View.VISIBLE else View.GONE
         }
     }
 
@@ -169,9 +164,7 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         for ((chapter, verses) in chapters) {
             val chapterButton = Button(this)
             chapterButton.text = chapter
-            chapterButton.setOnClickListener {
-                showVerses(verses)
-            }
+            chapterButton.setOnClickListener { showVerses(verses) }
             themesContainer.addView(chapterButton)
         }
     }
@@ -192,8 +185,6 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
                 textView.text = text
                 selectedVerse = text
                 scrollView.fullScroll(ScrollView.FOCUS_UP)
-
-                // Usar TTS para leer el versículo
                 speakVerse(text)
             }
             themesContainer.addView(verseButton)
@@ -213,7 +204,6 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
                 Toast.makeText(this, getString(R.string.select_verse_first), Toast.LENGTH_SHORT).show()
             }
         }
-
         themesContainer.addView(shareButton)
     }
 
@@ -266,5 +256,5 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
             tts.shutdown()
         }
         super.onDestroy()
-    } }
-
+    }
+}
