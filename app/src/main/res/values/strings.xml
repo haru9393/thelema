@@ -46,5 +46,6 @@
     <string name="share_message">📖 %1$s \n\nDescarga la app de Thelema 📲</string>
     <string name="share_with">Compartir versículo con:</string>
     <string name="select_verse_first">Selecciona un versículo antes de compartir</string>
+    <string name="contenido_oraciones_y_rituales">contenido_oraciones_y_rituales</string>
 
 </resources>

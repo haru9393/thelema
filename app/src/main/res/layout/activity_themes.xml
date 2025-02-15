@@ -5,7 +5,6 @@
     android:layout_height="match_parent"
     android:padding="16dp">
 
-    <!-- Botón de regreso -->
     <Button
         android:id="@+id/buttonBack"
         android:layout_width="wrap_content"
@@ -18,7 +17,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>
 
-    <!-- Lista de Temas -->
     <ListView
         android:id="@+id/themesListView"
         android:layout_width="0dp"
@@ -30,7 +28,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@id/verseTextView"/>
 
-    <!-- Texto con el versículo seleccionado -->
     <TextView
         android:id="@+id/verseTextView"
         android:layout_width="0dp"
@@ -44,7 +41,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
-    <!-- Botón de compartir -->
     <Button
         android:id="@+id/buttonShare"
         android:layout_width="wrap_content"
@@ -60,6 +56,4 @@
         app:layout_constraintBottom_toBottomOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
-
-
 

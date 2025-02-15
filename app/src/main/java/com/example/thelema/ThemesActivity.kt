@@ -1,13 +1,12 @@
 package com.example.thelema
 
 import android.content.Intent
-import android.widget.Toast
 import android.os.Bundle
 import android.widget.AdapterView
-import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.ListView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 
 class ThemesActivity : AppCompatActivity() {
@@ -33,39 +32,42 @@ class ThemesActivity : AppCompatActivity() {
         "Sanidad" to "El cuerpo es un templo, cuídalo y fortalécelo. (Liber AL vel Legis 2:56)"
     )
 
+    private lateinit var verseTextView: TextView
+    private lateinit var themesListView: ListView
+    private lateinit var buttonBack: Button
+    private lateinit var buttonShare: Button
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_themes) // Nombre correcto del layout
+        setContentView(R.layout.activity_themes)
 
-        val themesListView: ListView = findViewById(R.id.themesListView) // ID correcto
-        val verseTextView: TextView = findViewById(R.id.verseTextView) // ID correcto
-        val buttonBack: Button = findViewById(R.id.buttonBack) // 🔹 Botón de regreso
-        val buttonShare: Button = findViewById(R.id.buttonShare) // 🔹 Botón de compartir
+        verseTextView = findViewById(R.id.verseTextView)
+        themesListView = findViewById(R.id.themesListView)
+        buttonBack = findViewById(R.id.buttonBack) // Inicializa buttonBack
+        buttonShare = findViewById(R.id.buttonShare) // Inicializa buttonShare
 
-        // Configurar el adaptador del ListView
-        val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, themes)
+
+        val adapter = ThemesAdapter(this, android.R.layout.simple_list_item_2, themes)
         themesListView.adapter = adapter
 
-        // Acción al hacer clic en un tema
         themesListView.onItemClickListener = AdapterView.OnItemClickListener { _, _, position, _ ->
             val selectedTheme = themes[position]
             val verse = verses[selectedTheme] ?: "No hay versículo disponible"
             verseTextView.text = verse
         }
 
-        // 🔹 Acción para el botón de regreso
         buttonBack.setOnClickListener {
-            finish() // Cierra esta actividad y regresa a MainActivity
+            finish()
         }
 
-        // 🔹 Acción para compartir versículo
         buttonShare.setOnClickListener {
             val verseText = verseTextView.text.toString()
 
             if (verseText.isNotEmpty()) {
                 val shareIntent = Intent().apply {
                     action = Intent.ACTION_SEND
-                    putExtra(Intent.EXTRA_TEXT, "📖 $verseText \n\nDescarga la app de Thelema 📲")
+                    putExtra(Intent.EXTRA_TEXT, " $verseText \n\nDescarga la app de Thelema ")
                     type = "text/plain"
                 }
                 startActivity(Intent.createChooser(shareIntent, "Compartir versículo con:"))
@@ -73,5 +75,5 @@ class ThemesActivity : AppCompatActivity() {
                 Toast.makeText(this, "No hay versículo seleccionado", Toast.LENGTH_SHORT).show()
             }
         }
-    } }
-
+    }
+}
