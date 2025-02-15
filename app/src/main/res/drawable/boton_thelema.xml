@@ -7,11 +7,16 @@
             <stroke android:width="2dp" android:color="@color/thelema_escarlata"/>
         </shape>
     </item>
-    <item>
-        <shape android:shape="rectangle">
-            <solid android:color="@color/thelema_morado"/>
-            <corners android:radius="16dp"/>
-            <stroke android:width="2dp" android:color="@color/thelema_dorado"/>
-        </shape>
+    <item android:state_focused="true">  <shape android:shape="rectangle">
+        <solid android:color="@color/thelema_morado"/>
+        <corners android:radius="16dp"/>
+        <stroke android:width="2dp" android:color="@color/thelema_dorado"/>
+    </shape>
+    </item>
+    <item>  <shape android:shape="rectangle">
+        <solid android:color="@color/thelema_morado"/>
+        <corners android:radius="16dp"/>
+        <stroke android:width="2dp" android:color="@color/thelema_dorado"/>
+    </shape>
     </item>
 </selector>
