@@ -5,6 +5,7 @@ import android.widget.Button
 import android.widget.TextView
 import android.view.View
 import android.widget.ScrollView
+import android.text.method.ScrollingMovementMethod
 import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
@@ -199,18 +200,32 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // Referencias a los botones y otros elementos
+        // Referencias a los botones
         val buttonLiberAlVelLegis: Button = findViewById(R.id.buttonLiberAlVelLegis)
+        val buttonLiberII: Button = findViewById(R.id.buttonLiberII)
+        val buttonLiberTzaddi: Button = findViewById(R.id.buttonLiberTzaddi)
         val buttonOraciones: Button = findViewById(R.id.buttonOraciones)
         val scrollView: ScrollView = findViewById(R.id.scrollView)
         val textView: TextView = findViewById(R.id.textView)
 
-        // Habilitar el desplazamiento en el TextView
+        // Habilitar desplazamiento en el TextView
         textView.movementMethod = ScrollingMovementMethod()
 
         // Mostrar contenido de Liber AL vel Legis
         buttonLiberAlVelLegis.setOnClickListener {
             textView.text = getBookContent("Liber AL vel Legis")
+            scrollView.visibility = View.VISIBLE
+        }
+
+        // Mostrar contenido de Liber II
+        buttonLiberII.setOnClickListener {
+            textView.text = getBookContent("Liber II")
+            scrollView.visibility = View.VISIBLE
+        }
+
+        // Mostrar contenido de Liber Tzaddi
+        buttonLiberTzaddi.setOnClickListener {
+            textView.text = getBookContent("Liber Tzaddi")
             scrollView.visibility = View.VISIBLE
         }
 
@@ -243,4 +258,5 @@ class MainActivity : AppCompatActivity() {
             content.append("$text\n\n")
         }
         return content.toString()
-    } }
+    }
+}
