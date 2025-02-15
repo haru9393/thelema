@@ -44,11 +44,23 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
+        <!-- Título de Oraciones y Rituales -->
         <TextView
             android:id="@+id/textViewOracionesRituales"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/oraciones_y_rituales"/>
+
+        <!-- Contenido de las oraciones -->
+        <TextView
+            android:id="@+id/textViewContenido"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:textSize="16sp"
+            android:textColor="#000000"
+            android:visibility="gone" />
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

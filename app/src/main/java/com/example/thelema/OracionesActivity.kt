@@ -19,9 +19,8 @@ class OracionesActivity : AppCompatActivity() {
         val containerOraciones = findViewById<LinearLayout>(R.id.oracionesContainer)
         val textoEstatico = findViewById<TextView>(R.id.textViewListenVerse)
         val textViewOracionesRituales = findViewById<TextView>(R.id.textViewOracionesRituales)
+        val textViewContenido = findViewById<TextView>(R.id.textViewContenido) // Nuevo TextView para mostrar el contenido
 
-        // Lista de oraciones y rituales
-        // *** AQUI DEBES AÑADIR LA LISTA DE ORACIONES Y RITUALES ***
         // Lista de oraciones y rituales
         val oraciones = listOf(
             Pair("Oración a Nuit", """
@@ -110,35 +109,23 @@ class OracionesActivity : AppCompatActivity() {
 
         // Establecer el listener para el botón de Oraciones y Rituales
         buttonOraciones.setOnClickListener {
-            // Ocultar el texto estático
             textoEstatico.visibility = TextView.INVISIBLE
-            //Ocultar el texto de oraciones y rituales
             textViewOracionesRituales.visibility = TextView.INVISIBLE
-
-            // Cambiar la visibilidad del contenedor de oraciones a VISIBLE
             containerOraciones.visibility = View.VISIBLE
-
-            // Limpiar cualquier contenido previo (si existe) antes de agregar los nuevos botones
+            textViewContenido.visibility = View.GONE // Asegúrate de ocultar el contenido al principio
             containerOraciones.removeAllViews()
 
-            // Crear los botones dinámicamente y añadirlos al contenedor
             for ((titulo, contenido) in oraciones) {
                 val button = Button(this).apply {
                     text = titulo
                     setOnClickListener {
-                        abrirDetalleOracion(titulo, contenido) // Llamar a la función para abrir el detalle
+                        // Antes de mostrar nuevo contenido, ocultamos cualquier contenido anterior
+                        textViewContenido.visibility = View.VISIBLE
+                        textViewContenido.text = contenido // Mostrar el contenido en el TextView
                     }
                 }
-                containerOraciones.addView(button) // Añadir el botón al contenedor
+                containerOraciones.addView(button)
             }
         }
-    }
-
-    // Función para abrir el detalle de la oración o ritual
-    private fun abrirDetalleOracion(titulo: String, contenido: String) {
-        // Aquí debes implementar la lógica para mostrar el detalle de la oración o ritual
-        // Por ejemplo, puedes abrir una nueva actividad o mostrar un diálogo
-        // Para este ejemplo, simplemente mostraremos un mensaje en la consola
-        println("Título: $titulo\nContenido: $contenido")
     }
 }
