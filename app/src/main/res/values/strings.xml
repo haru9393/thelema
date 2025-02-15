@@ -47,5 +47,6 @@
     <string name="share_with">Compartir versículo con:</string>
     <string name="select_verse_first">Selecciona un versículo antes de compartir</string>
     <string name="contenido_oraciones_y_rituales">contenido_oraciones_y_rituales</string>
+    <string name="regresar">regresar</string>
 
 </resources>

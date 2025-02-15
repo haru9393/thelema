@@ -11,8 +11,9 @@ import android.widget.ScrollView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.work.* // Importa las clases de WorkManager
 import java.util.Locale
-
+import java.util.concurrent.TimeUnit // Importa TimeUnit
 class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
 
     private lateinit var tts: TextToSpeech
@@ -130,13 +131,11 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         buttonLiberIi.setOnClickListener { showChapters("Liber II") }
         buttonLiberTzaddi.setOnClickListener { showChapters("Liber Tzaddi") }
 
-        // Botón "Oraciones"
+        // *** Botón "Oraciones y Rituales" - MODIFICADO ***
         val buttonOraciones = findViewById<Button>(R.id.buttonOraciones)
-        val oracionesContainer = findViewById<LinearLayout>(R.id.oracionesContainer)
-        oracionesContainer.visibility = View.GONE
-
         buttonOraciones.setOnClickListener {
-            oracionesContainer.visibility = if (oracionesContainer.visibility == View.GONE) View.VISIBLE else View.GONE
+            val intent = Intent(this, OracionesActivity::class.java)
+            startActivity(intent)
         }
 
         // *** Botón "Temas y Versículos" - Código corregido y completo ***
@@ -145,6 +144,26 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
             val intent = Intent(this, ThemesActivity::class.java)
             startActivity(intent)
         }
+
+        scheduleDailyVerseWorker() // Llama a la función para programar el worker
+    }
+
+    private fun scheduleDailyVerseWorker() {
+        val constraints = Constraints.Builder()
+            // Puedes añadir restricciones aquí si son necesarias, por ejemplo:
+            // .setRequiredNetworkType(NetworkType.CONNECTED) // Requiere conexión a internet
+            .build()
+
+        val workRequest = PeriodicWorkRequestBuilder<DailyVerseWorker>(
+            1, // Intervalo de repetición
+            TimeUnit.DAYS // Unidad de tiempo
+        )
+            .setConstraints(constraints)
+            // Puedes añadir un delay inicial si lo deseas:
+            // .setInitialDelay(1, TimeUnit.DAYS)
+            .build()
+
+        WorkManager.getInstance(this).enqueue(workRequest)
     }
 
     private fun showChapters(book: String) {

@@ -5,9 +5,11 @@ import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import androidx.core.app.NotificationCompat
 import androidx.work.Worker
 import androidx.work.WorkerParameters
+import java.util.Random
 
 class DailyVerseWorker(context: Context, workerParams: WorkerParameters) : Worker(context, workerParams) {
 
@@ -23,74 +25,51 @@ class DailyVerseWorker(context: Context, workerParams: WorkerParameters) : Worke
 
         val notificationManager = applicationContext.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
-        // Crear canal de notificación (para Android 8+)
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+        // Crear canal de notificación (para Android 8.0 Oreo y superior)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val channel = NotificationChannel(channelId, channelName, NotificationManager.IMPORTANCE_DEFAULT)
             notificationManager.createNotificationChannel(channel)
         }
 
         // Intent para abrir la app cuando se toque la notificación
         val intent = Intent(applicationContext, MainActivity::class.java)
-        val pendingIntent = PendingIntent.getActivity(applicationContext, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE)
+        //Flags added for android 12 and above
+        val pendingIntent = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            PendingIntent.getActivity(applicationContext, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE)
+        } else {
+            PendingIntent.getActivity(applicationContext, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
+        }
+
 
         // Obtener un versículo aleatorio
         val verse = getRandomVerse()
 
         // Construir la notificación
-        val notification = NotificationCompat.Builder(applicationContext, channelId)
-            .setSmallIcon(android.R.drawable.ic_dialog_info)
+        val notificationBuilder = NotificationCompat.Builder(applicationContext, channelId)
+            .setSmallIcon(android.R.drawable.ic_dialog_info) // Usa un icono adecuado
             .setContentTitle("Versículo del Día")
             .setContentText(verse)
             .setContentIntent(pendingIntent)
             .setAutoCancel(true)
-            .build()
+
+        // Establecer la prioridad (opcional, pero recomendado)
+        notificationBuilder.priority = NotificationCompat.PRIORITY_DEFAULT
+
+        val notification = notificationBuilder.build()
+
 
         // Enviar la notificación
         notificationManager.notify(notificationId, notification)
     }
 
     private fun getRandomVerse(): String {
-        val verses = listOf(
+        val verses = listOf( // ... (your list of verses)
             "Haz lo que tú quieras será toda la Ley.",
             "El amor es la ley, amor bajo voluntad.",
-            "La voluntad es la ley.",
-            "La libertad es el principio de toda acción.",
-            "Sigue tu voluntad, y será toda la Ley.",
-            "No hay más religión que hacer lo que tú quieras.",
-            "El hombre es el centro del universo.",
-            "La voluntad que no se puede expresar es una negación de sí misma.",
-            "La libertad comienza con la voluntad.",
-            "La vida es una cuestión de elección, no de destino.",
-            "Todo el universo se rige por una ley que es voluntad.",
-            "El amor debe ser la base de toda acción.",
-            "La ley de la libertad se basa en el amor.",
-            "El único verdadero pecado es la negación de la voluntad.",
-            "El hombre es su propio Dios.",
-            "La naturaleza humana es una manifestación de la voluntad divina.",
-            "La voluntad no tiene límites, solo el conocimiento lo tiene.",
-            "La libertad no es un regalo, es un derecho inherente.",
-            "Cada acción es una afirmación de la voluntad.",
-            "La ley se cumple a través de la expresión de la voluntad.",
-            "La magia es la ciencia de la voluntad.",
-            "El amor es la clave para comprender el universo.",
-            "Solo el hombre que sigue su voluntad es verdaderamente libre.",
-            "La verdadera religión es la que libera la voluntad humana.",
-            "El poder de la voluntad puede cambiar el curso de los eventos.",
-            "El destino es solo la expresión de la voluntad colectiva.",
-            "El amor bajo voluntad es el principio de la magia.",
-            "En la libertad, se encuentra el verdadero poder.",
-            "La ley de la voluntad es la ley de la vida misma.",
-            "La voluntad es la energía primaria de todo ser.",
-            "El universo responde a la voluntad, no al deseo.",
-            "La voluntad es la raíz de todo conocimiento verdadero.",
-            "La voluntad siempre encuentra su camino hacia la manifestación.",
-            "Cada acción es una expresión de la voluntad universal.",
-            "El amor, cuando es verdadero, siempre está alineado con la voluntad.",
-            "La libertad solo puede ser alcanzada a través de la voluntad.",
-            "La magia no es un acto de deseo, sino de voluntad.",
-            "El conocimiento sin voluntad es vacío.",
+            // ... (rest of your verses)
             "El poder de la voluntad es infinito, solo limitado por la comprensión humana."
         )
-        return verses.random()
+        val randomIndex = Random().nextInt(verses.size) // Use java.util.Random
+        return verses[randomIndex]
     }
 }
