@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.LinearLayout
+import android.widget.ScrollView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 
@@ -17,9 +18,9 @@ class OracionesActivity : AppCompatActivity() {
         // Declarar las vistas
         val buttonOraciones = findViewById<Button>(R.id.buttonOraciones)
         val containerOraciones = findViewById<LinearLayout>(R.id.oracionesContainer)
-        val textoEstatico = findViewById<TextView>(R.id.textViewListenVerse)
         val textViewOracionesRituales = findViewById<TextView>(R.id.textViewOracionesRituales)
-        val textViewContenido = findViewById<TextView>(R.id.textViewContenido) // Nuevo TextView para mostrar el contenido
+        val textViewContenido = findViewById<TextView>(R.id.textViewContenido) // Para mostrar el contenido
+        val scrollViewContenido = findViewById<ScrollView>(R.id.scrollViewContenido) // ScrollView para el contenido
 
         // Lista de oraciones y rituales
         val oraciones = listOf(
@@ -106,12 +107,12 @@ class OracionesActivity : AppCompatActivity() {
         "Gracias, Ángel Guardián, por tu protección. Que este ritual se cierre con bendiciones y claridad."
     """.trimIndent())
         )
+
         // Establecer el listener para el botón de Oraciones y Rituales
         buttonOraciones.setOnClickListener {
-            // Asegúrate de que las vistas estén inicializadas correctamente
-            textoEstatico.visibility = TextView.INVISIBLE
-            textViewOracionesRituales.visibility = TextView.INVISIBLE
+            // Mostrar el contenedor de oraciones y rituales
             containerOraciones.visibility = View.VISIBLE
+            textViewOracionesRituales.visibility = View.INVISIBLE
 
             // Limpiar el contenedor antes de agregar los nuevos botones
             containerOraciones.removeAllViews()
@@ -121,8 +122,8 @@ class OracionesActivity : AppCompatActivity() {
                 val button = Button(this).apply {
                     text = titulo
                     setOnClickListener {
-                        // Al hacer clic en un botón, mostrar el contenido en el TextView
-                        textViewContenido.visibility = View.VISIBLE
+                        // Mostrar el contenido en el TextView dentro del ScrollView
+                        scrollViewContenido.visibility = View.VISIBLE
                         textViewContenido.text = contenido
 
                         // Agregar un Log para depurar
@@ -134,3 +135,4 @@ class OracionesActivity : AppCompatActivity() {
         }
     }
 }
+
