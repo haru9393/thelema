@@ -8,6 +8,11 @@
     <string name="liber_ii">LIBER II</string>
     <string name="liber_tzaddi">LIBER TZADDI</string>
 
+    <!-- Contenidos para los libros -->
+    <string name="liber_al_vel_legis_content">Contenido de Liber AL Vel Legis…</string>
+    <string name="liber_ii_content">Contenido de Liber II…</string>
+    <string name="liber_tzaddi_content">Contenido de Liber Tzaddi…</string>
+
     <string name="titulo_capitulos">¡Capítulos!</string>
     <string name="chapter_title">Capítulo %d</string>
     <string name="select_verse">Selecciona un versículo</string>
@@ -48,5 +53,4 @@
     <string name="select_verse_first">Selecciona un versículo antes de compartir</string>
     <string name="contenido_oraciones_y_rituales">contenido_oraciones_y_rituales</string>
     <string name="regresar">regresar</string>
-
 </resources>

@@ -1,23 +1,16 @@
 package com.example.thelema
 
-import android.content.Intent
 import android.os.Bundle
-import android.speech.tts.TextToSpeech
-import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.ScrollView
 import android.widget.TextView
+import android.content.Intent
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.work.* // Importa las clases de WorkManager
-import java.util.Locale
-import java.util.concurrent.TimeUnit // Importa TimeUnit
 
-class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
-
-    private lateinit var tts: TextToSpeech
+class MainActivity : AppCompatActivity() {
 
     private val bookContentData: Map<String, Map<String, Map<String, String>>> = mapOf(
         "Liber AL vel Legis" to mapOf(
@@ -116,96 +109,75 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         )
     )
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        tts = TextToSpeech(this, this)
-
-        // Inicialización de botones y OnClickListeners para "Liber"
+        // Referencias a los botones
         val buttonLiberAlVelLegis = findViewById<Button>(R.id.buttonLiberAlVelLegis)
         val buttonLiberIi = findViewById<Button>(R.id.buttonLiberIi)
         val buttonLiberTzaddi = findViewById<Button>(R.id.buttonLiberTzaddi)
 
-        buttonLiberAlVelLegis.setOnClickListener { showChapters("Liber AL vel Legis") }
-        buttonLiberIi.setOnClickListener { showChapters("Liber II") }
-        buttonLiberTzaddi.setOnClickListener { showChapters("Liber Tzaddi") }
-
-        // *** Botón "Oraciones y Rituales" - MODIFICADO ***
-        val buttonOraciones = findViewById<Button>(R.id.buttonOraciones)
-        buttonOraciones.setOnClickListener {
-            val intent = Intent(this, OracionesActivity::class.java)
-            startActivity(intent)
-        }
-
-        // *** Botón "Temas y Versículos" - Código corregido y completo ***
+        // Referencias a otros botones
         val buttonThemes = findViewById<Button>(R.id.buttonThemes)
-        buttonThemes.setOnClickListener {
-            val intent = Intent(this, ThemesActivity::class.java)
-            startActivity(intent)
-        }
+        val buttonOraciones = findViewById<Button>(R.id.buttonOraciones)
 
-        scheduleDailyVerseWorker() // Llama a la función para programar el worker
-    }
-
-    private fun scheduleDailyVerseWorker() {
-        val constraints = Constraints.Builder()
-            .build()
-
-        val workRequest = PeriodicWorkRequestBuilder<DailyVerseWorker>(
-            1, TimeUnit.DAYS // Intervalo de repetición
-        )
-            .setConstraints(constraints)
-            .build()
-
-        WorkManager.getInstance(this).enqueue(workRequest)
-    }
-
-    private fun showChapters(book: String) {
+        // Contenedores
         val themesContainer = findViewById<LinearLayout>(R.id.themesContainer)
-        themesContainer.removeAllViews()
-
-        val chapters = bookContentData[book] ?: emptyMap()
-
-        for ((chapter, verses) in chapters) {
-            val chapterButton = Button(this)
-            chapterButton.text = chapter
-            chapterButton.setOnClickListener {
-                showVerses(verses)
-            }
-            themesContainer.addView(chapterButton)
-        }
-    }
-
-    private fun showVerses(verses: Map<String, String>) {
-        val themesContainer = findViewById<LinearLayout>(R.id.themesContainer)
+        val oracionesContainer = findViewById<LinearLayout>(R.id.oracionesContainer)
         val shareButtonContainer = findViewById<LinearLayout>(R.id.shareButtonContainer)
         val scrollView = findViewById<ScrollView>(R.id.scrollView)
         val textView = findViewById<TextView>(R.id.textView)
+        val shareButton = findViewById<Button>(R.id.share_button) // Asegúrate de que este botón exista en tu layout
 
-        themesContainer.removeAllViews()
-        shareButtonContainer.removeAllViews()
-        shareButtonContainer.visibility = View.GONE
-
-        var selectedVerse: String? = null
-
-        verses.forEach { (verse, text) ->
-            val verseButton = Button(this)
-            verseButton.text = verse
-            verseButton.setOnClickListener {
-                textView.text = text
-                selectedVerse = text
-                scrollView.fullScroll(ScrollView.FOCUS_UP)
-                speakVerse(text)
-            }
-            themesContainer.addView(verseButton)
+        // Acción para el botón Liber AL Vel Legis
+        buttonLiberAlVelLegis.setOnClickListener {
+            // Mostrar el contenido de Liber AL Vel Legis
+            textView.text = getBookContent("Liber AL vel Legis")
+            scrollView.visibility = View.VISIBLE
+            shareButtonContainer.visibility = View.VISIBLE // Hacer visible el contenedor de compartir
         }
 
-        val shareButton = Button(this)
-        shareButton.text = getString(R.string.share_verse)
+        // Acción para el botón Liber II
+        buttonLiberIi.setOnClickListener {
+            // Mostrar el contenido de Liber II
+            textView.text = getBookContent("Liber II")
+            scrollView.visibility = View.VISIBLE
+            shareButtonContainer.visibility = View.VISIBLE // Hacer visible el contenedor de compartir
+        }
+
+        // Acción para el botón Liber Tzaddi
+        buttonLiberTzaddi.setOnClickListener {
+            // Mostrar el contenido de Liber Tzaddi
+            textView.text = getBookContent("Liber Tzaddi")
+            scrollView.visibility = View.VISIBLE
+            shareButtonContainer.visibility = View.VISIBLE // Hacer visible el contenedor de compartir
+        }
+
+        // Acción para el botón de Themes
+        buttonThemes.setOnClickListener {
+            // Mostrar u ocultar el contenedor de temas
+            if (themesContainer.visibility == View.GONE) {
+                themesContainer.visibility = View.VISIBLE
+            } else {
+                themesContainer.visibility = View.GONE
+            }
+        }
+
+        // Acción para el botón de Oraciones y Ritual
+        buttonOraciones.setOnClickListener {
+            // Mostrar u ocultar el contenedor de oraciones
+            if (oracionesContainer.visibility == View.GONE) {
+                oracionesContainer.visibility = View.VISIBLE
+            } else {
+                oracionesContainer.visibility = View.GONE
+            }
+        }
+
+        // Acción para el botón de compartir (dentro del contenedor shareButtonContainer)
         shareButton.setOnClickListener {
-            if (!selectedVerse.isNullOrEmpty()) {
+            val selectedVerse = textView.text.toString() // O cualquier otro texto que quieras compartir
+            if (selectedVerse.isNotEmpty()) {
                 val shareIntent = Intent().apply {
                     action = Intent.ACTION_SEND
                     putExtra(Intent.EXTRA_TEXT, getString(R.string.share_message, selectedVerse))
@@ -216,34 +188,20 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
                 Toast.makeText(this, getString(R.string.select_verse_first), Toast.LENGTH_SHORT).show()
             }
         }
-
-        shareButtonContainer.addView(shareButton)
-        shareButtonContainer.visibility = View.VISIBLE
     }
 
-    private fun speakVerse(verseText: String) {
-        if (tts.isSpeaking) {
-            tts.stop()
-        }
-        tts.speak(verseText, TextToSpeech.QUEUE_FLUSH, null, null)
-    }
+    // Función para obtener el contenido de un libro
+    private fun getBookContent(bookName: String): String {
+        val bookContent = bookContentData[bookName]
+        var content = ""
 
-    override fun onInit(status: Int) {
-        if (status == TextToSpeech.SUCCESS) {
-            val langResult = tts.setLanguage(Locale.getDefault())
-            if (langResult == TextToSpeech.LANG_MISSING_DATA || langResult == TextToSpeech.LANG_NOT_SUPPORTED) {
-                Log.e("TTS", "El idioma no está soportado o no tiene datos.")
+        bookContent?.forEach { (chapter, verses) ->
+            content += "\n$chapter\n"
+            verses.forEach { (verse, text) ->
+                content += "$verse: $text\n"
             }
-        } else {
-            Log.e("TTS", "Error al inicializar el TTS.")
         }
-    }
 
-    override fun onDestroy() {
-        if (::tts.isInitialized) {
-            tts.stop()
-            tts.shutdown()
-        }
-        super.onDestroy()
+        return content
     }
 }
