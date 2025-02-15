@@ -63,5 +63,6 @@
         <string name="button_themes">Themes</string>
     <string name="chapter_title">Capítulo: %1$s</string>
     <string name="no_content_available">No hay contenido disponible para este libro.</string>
+    <string name="verse_format">%1$s: %2$s</string>
 
 </resources>
