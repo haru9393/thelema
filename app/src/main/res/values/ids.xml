@@ -3,4 +3,5 @@
     <item name="scrollView" type="id" />
     <item name="themesContainer" type="id" />
     <item name="textViewListenVerse" type="id" />
+    <item name="buttonPreguntas" type="id">buttonPreguntas</item>
 </resources>

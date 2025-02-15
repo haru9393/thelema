@@ -179,6 +179,50 @@
                 android:lineSpacingExtra="4dp"
                 android:gravity="center"/>
         </LinearLayout>
-    </ScrollView> <!-- Cierre del ScrollView -->
+    </ScrollView>
 
-</androidx.constraintlayout.widget.ConstraintLayout> <!-- Cierre del ConstraintLayout -->
+    <!-- Nueva sección con botones Preguntas y Oraciones -->
+    <LinearLayout
+        android:id="@+id/buttonsContainerAdditional"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:padding="16dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@id/buttonThemes"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <!-- Botón para Preguntas -->
+        <Button
+            android:id="@+id/buttonPreguntas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:padding="12dp"
+            android:minWidth="120dp"
+            android:maxWidth="180dp"
+            android:background="@drawable/boton_thelema"
+            android:text="@string/preguntas"
+            android:textAllCaps="false"
+            android:textColor="@color/thelema_dorado"
+            style="?android:attr/buttonBarButtonStyle"/>
+
+        <!-- Botón para Oraciones -->
+        <Button
+            android:id="@+id/buttonOraciones"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:padding="12dp"
+            android:minWidth="120dp"
+            android:maxWidth="180dp"
+            android:background="@drawable/boton_thelema"
+            android:text="@string/oraciones"
+            android:textAllCaps="false"
+            android:textColor="@color/thelema_dorado"
+            style="?android:attr/buttonBarButtonStyle"/>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
