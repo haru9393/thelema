@@ -109,23 +109,27 @@ class OracionesActivity : AppCompatActivity() {
 
         // Establecer el listener para el botón de Oraciones y Rituales
         buttonOraciones.setOnClickListener {
+            // Asegúrate de que las vistas estén inicializadas correctamente
             textoEstatico.visibility = TextView.INVISIBLE
             textViewOracionesRituales.visibility = TextView.INVISIBLE
             containerOraciones.visibility = View.VISIBLE
-            textViewContenido.visibility = View.GONE // Asegúrate de ocultar el contenido al principio
+
+            // Limpiar el contenedor antes de agregar los nuevos botones
             containerOraciones.removeAllViews()
 
+            // Agregar los botones para las oraciones y rituales sin comprobación
             for ((titulo, contenido) in oraciones) {
                 val button = Button(this).apply {
                     text = titulo
                     setOnClickListener {
-                        // Antes de mostrar nuevo contenido, ocultamos cualquier contenido anterior
+                        // Al hacer clic en un botón, mostrar el contenido en el TextView
                         textViewContenido.visibility = View.VISIBLE
-                        textViewContenido.text = contenido // Mostrar el contenido en el TextView
+                        textViewContenido.text = contenido
                     }
                 }
+                // Asegúrate de que se añaden correctamente los botones al contenedor
                 containerOraciones.addView(button)
             }
-        }
-    }
-}
+        } } }
+
+

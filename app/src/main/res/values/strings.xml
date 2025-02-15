@@ -32,4 +32,5 @@
     <string name="toca_un_versículo_para_escucharlo">Toca un versículo para escucharlo</string>
     <string name="titulo_de_la_oracion">Título de la Oración</string>
     <string name="contenido_de_la_oracion">Contenido de la Oración</string>
+    <string name="no_oraciones_disponibles">No hay oraciones disponibles</string>
 </resources>
