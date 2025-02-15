@@ -1,13 +1,10 @@
 package com.example.thelema
 
 import android.os.Bundle
-import android.view.View
 import android.widget.Button
-import android.widget.LinearLayout
-import android.widget.ScrollView
 import android.widget.TextView
-import android.content.Intent
-import android.widget.Toast
+import android.view.View
+import android.widget.ScrollView
 import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
@@ -109,99 +106,91 @@ class MainActivity : AppCompatActivity() {
         )
     )
 
+    private val oraciones = listOf(
+        Pair("Oración a Nuit", """
+        Oh Nuit, vasto y eterno misterio,  
+        Madre cósmica que envuelves al universo entero,  
+        Tú que eres la estrella que no se apaga,  
+        Contigo, me uno en la luz infinita y el amor absoluto.  
+        Eres el espacio y el tiempo,  
+        Y en tu abrazo encuentro la libertad y el éxtasis eterno.  
+        Oh Nuit, guíame en tu silencio y en tu sabiduría,  
+        Para que mi voluntad se disuelva en tu voluntad infinita.
+    """.trimIndent()),
+        Pair("Oración a Hadit", """
+        Oh Hadit, el centro sin círculo,  
+        La llama eterna que arde en lo más profundo de mi ser,  
+        Tú que eres la chispa de la voluntad,  
+        Avivando mi fuego interior con tu pasión infinita.  
+        Dame el poder de ser uno con el movimiento,  
+        Haz de mí un vehículo para la acción pura,  
+        Mi voluntad es tu voluntad,  
+        Y a través de ella, manifiesto mi verdadero ser en el mundo.
+    """.trimIndent()),
+        Pair("Oración a Ra-Hoor-Khuit", """
+        Oh Ra-Hoor-Khuit, Señor de la guerra y la justicia,  
+        Tú que traes la luz y la ley a la oscuridad,  
+        Te invoco en tu forma guerrera y sublime.  
+        Que tu fuerza guíe mi voluntad en este día,  
+        Y que tu espada, afilada y brillante, corte cualquier obstáculo en mi camino.  
+        Que tu presencia sea mi protección,  
+        Y que tu luz me inspire a luchar por lo que es justo.
+    """.trimIndent()),
+        Pair("Oración a Hoor-paar-kraat", """
+        Oh Hoor-paar-kraat, señor del silencio y la paz interior,  
+        En tu quietud encuentro la verdad,  
+        En tu misterio, la llave de mi alma.  
+        Que tu silencio me enseñe a escuchar,  
+        Que tu sabiduría ilumine mi mente.  
+        Permíteme descansar en la calma de tu presencia,  
+        Para que, en la quietud, pueda descubrir mi verdadera Voluntad.
+    """.trimIndent()),
+        Pair("Oración a Babalon", """
+        Oh Babalon, madre del éxtasis y del fuego sagrado,  
+        Tú que recibes con amor y entregas con pasión,  
+        Derrama sobre mí tu fuerza y tu deseo infinito.  
+        Que mi copa rebose con tu vino sagrado,  
+        Que mi espíritu se libere en la entrega total.  
+        Oh gran Babalon, enséñame el camino de la pasión y la libertad.
+    """.trimIndent()),
+        Pair("Oración a Therion", """
+        Oh Therion, bestia indómita del poder y la voluntad,  
+        Tú que ruges con la fuerza del universo,  
+        Despierta en mí el coraje de seguir mi camino.  
+        Que tu fuego arda en mi sangre,  
+        Que tu furia sea mi escudo,  
+        Y que mi voluntad sea firme como la tuya.  
+        En tu fuerza, encuentro mi libertad.
+    """.trimIndent()),
+        Pair("Ritual de la Estrella Rubí", """
+        1. De pie, de cara al Este.
+        2. Trazar el pentagrama: usando un dedo o una espada ritual, dibuja un pentagrama en el aire.
+        3. Invocar los cuatro elementos: "Te invoco, oh Tierra, Agua, Fuego y Aire."
+        4. Invocar el Espíritu: "Te invoco, oh Espíritu, que habitas en lo más alto."
+        5. Recitar: "Soy el que soy, el mismo que el todo, y el todo que es todo."
+        6. Sellar con el símbolo del Sol: "Que así sea, con la fuerza del Sol."
+    """.trimIndent())
+    )
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // Referencias a los botones
-        val buttonLiberAlVelLegis = findViewById<Button>(R.id.buttonLiberAlVelLegis)
-        val buttonLiberIi = findViewById<Button>(R.id.buttonLiberIi)
-        val buttonLiberTzaddi = findViewById<Button>(R.id.buttonLiberTzaddi)
+        val oracionesButton: Button = findViewById(R.id.oracionesButton)
+        val contentTextView: TextView = findViewById(R.id.contentTextView)
+        val scrollView: ScrollView = findViewById(R.id.scrollView)
 
-        // Referencias a otros botones
-        val buttonThemes = findViewById<Button>(R.id.buttonThemes)
-        val buttonOraciones = findViewById<Button>(R.id.buttonOraciones)
-
-        // Contenedores
-        val themesContainer = findViewById<LinearLayout>(R.id.themesContainer)
-        val oracionesContainer = findViewById<LinearLayout>(R.id.oracionesContainer)
-        val shareButtonContainer = findViewById<LinearLayout>(R.id.shareButtonContainer)
-        val scrollView = findViewById<ScrollView>(R.id.scrollView)
-        val textView = findViewById<TextView>(R.id.textView)
-        val shareButton = findViewById<Button>(R.id.share_button) // Asegúrate de que este botón exista en tu layout
-
-        // Acción para el botón Liber AL Vel Legis
-        buttonLiberAlVelLegis.setOnClickListener {
-            // Mostrar el contenido de Liber AL Vel Legis
-            textView.text = getBookContent("Liber AL vel Legis")
+        oracionesButton.setOnClickListener {
+            contentTextView.text = getOracionesContent()
             scrollView.visibility = View.VISIBLE
-            shareButtonContainer.visibility = View.VISIBLE // Hacer visible el contenedor de compartir
-        }
-
-        // Acción para el botón Liber II
-        buttonLiberIi.setOnClickListener {
-            // Mostrar el contenido de Liber II
-            textView.text = getBookContent("Liber II")
-            scrollView.visibility = View.VISIBLE
-            shareButtonContainer.visibility = View.VISIBLE // Hacer visible el contenedor de compartir
-        }
-
-        // Acción para el botón Liber Tzaddi
-        buttonLiberTzaddi.setOnClickListener {
-            // Mostrar el contenido de Liber Tzaddi
-            textView.text = getBookContent("Liber Tzaddi")
-            scrollView.visibility = View.VISIBLE
-            shareButtonContainer.visibility = View.VISIBLE // Hacer visible el contenedor de compartir
-        }
-
-        // Acción para el botón de Themes
-        buttonThemes.setOnClickListener {
-            // Mostrar u ocultar el contenedor de temas
-            if (themesContainer.visibility == View.GONE) {
-                themesContainer.visibility = View.VISIBLE
-            } else {
-                themesContainer.visibility = View.GONE
-            }
-        }
-
-        // Acción para el botón de Oraciones y Ritual
-        buttonOraciones.setOnClickListener {
-            // Mostrar u ocultar el contenedor de oraciones
-            if (oracionesContainer.visibility == View.GONE) {
-                oracionesContainer.visibility = View.VISIBLE
-            } else {
-                oracionesContainer.visibility = View.GONE
-            }
-        }
-
-        // Acción para el botón de compartir (dentro del contenedor shareButtonContainer)
-        shareButton.setOnClickListener {
-            val selectedVerse = textView.text.toString() // O cualquier otro texto que quieras compartir
-            if (selectedVerse.isNotEmpty()) {
-                val shareIntent = Intent().apply {
-                    action = Intent.ACTION_SEND
-                    putExtra(Intent.EXTRA_TEXT, getString(R.string.share_message, selectedVerse))
-                    type = "text/plain"
-                }
-                startActivity(Intent.createChooser(shareIntent, getString(R.string.share_with)))
-            } else {
-                Toast.makeText(this, getString(R.string.select_verse_first), Toast.LENGTH_SHORT).show()
-            }
         }
     }
 
-    // Función para obtener el contenido de un libro
-    private fun getBookContent(bookName: String): String {
-        val bookContent = bookContentData[bookName]
+    private fun getOracionesContent(): String {
         var content = ""
-
-        bookContent?.forEach { (chapter, verses) ->
-            content += "\n$chapter\n"
-            verses.forEach { (verse, text) ->
-                content += "$verse: $text\n"
-            }
+        oraciones.forEach { (title, text) ->
+            content += "\n$title\n$text\n"
         }
-
         return content
     }
 }
