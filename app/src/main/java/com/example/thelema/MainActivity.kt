@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.work.* // Importa las clases de WorkManager
 import java.util.Locale
 import java.util.concurrent.TimeUnit // Importa TimeUnit
+
 class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
 
     private lateinit var tts: TextToSpeech
@@ -150,17 +151,12 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
 
     private fun scheduleDailyVerseWorker() {
         val constraints = Constraints.Builder()
-            // Puedes añadir restricciones aquí si son necesarias, por ejemplo:
-            // .setRequiredNetworkType(NetworkType.CONNECTED) // Requiere conexión a internet
             .build()
 
         val workRequest = PeriodicWorkRequestBuilder<DailyVerseWorker>(
-            1, // Intervalo de repetición
-            TimeUnit.DAYS // Unidad de tiempo
+            1, TimeUnit.DAYS // Intervalo de repetición
         )
             .setConstraints(constraints)
-            // Puedes añadir un delay inicial si lo deseas:
-            // .setInitialDelay(1, TimeUnit.DAYS)
             .build()
 
         WorkManager.getInstance(this).enqueue(workRequest)
