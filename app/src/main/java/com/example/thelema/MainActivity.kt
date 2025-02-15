@@ -121,6 +121,7 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
 
         tts = TextToSpeech(this, this)
 
+        // Inicialización de botones y OnClickListeners para "Liber"
         val buttonLiberAlVelLegis = findViewById<Button>(R.id.buttonLiberAlVelLegis)
         val buttonLiberIi = findViewById<Button>(R.id.buttonLiberIi)
         val buttonLiberTzaddi = findViewById<Button>(R.id.buttonLiberTzaddi)
@@ -129,12 +130,20 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         buttonLiberIi.setOnClickListener { showChapters("Liber II") }
         buttonLiberTzaddi.setOnClickListener { showChapters("Liber Tzaddi") }
 
+        // Botón "Oraciones"
         val buttonOraciones = findViewById<Button>(R.id.buttonOraciones)
         val oracionesContainer = findViewById<LinearLayout>(R.id.oracionesContainer)
         oracionesContainer.visibility = View.GONE
 
         buttonOraciones.setOnClickListener {
             oracionesContainer.visibility = if (oracionesContainer.visibility == View.GONE) View.VISIBLE else View.GONE
+        }
+
+        // *** Botón "Temas y Versículos" - Código corregido y completo ***
+        val buttonThemes = findViewById<Button>(R.id.buttonThemes)
+        buttonThemes.setOnClickListener {
+            val intent = Intent(this, ThemesActivity::class.java)
+            startActivity(intent)
         }
     }
 
