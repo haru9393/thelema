@@ -172,25 +172,36 @@ class MainActivity : AppCompatActivity() {
     """.trimIndent())
     )
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val oracionesButton: Button = findViewById(R.id.oracionesButton)
-        val contentTextView: TextView = findViewById(R.id.contentTextView)
+        // Corregimos los IDs para que coincidan con los que están en el XML
+        val oracionesButton: Button = findViewById(R.id.buttonOraciones)
+        val contentTextView: TextView = findViewById(R.id.textView)
         val scrollView: ScrollView = findViewById(R.id.scrollView)
 
+        // Al hacer click en el botón, se carga el contenido de las oraciones y se muestra el ScrollView
         oracionesButton.setOnClickListener {
-            contentTextView.text = getOracionesContent()
+            contentTextView.text = getOracionesContent()  // Usamos tanto oraciones como bookContentData
             scrollView.visibility = View.VISIBLE
         }
     }
 
+    // Función para obtener el contenido de las oraciones desde oraciones y bookContentData
     private fun getOracionesContent(): String {
         var content = ""
+
+        // Usamos oraciones para agregar su contenido
         oraciones.forEach { (title, text) ->
             content += "\n$title\n$text\n"
         }
+
+        // Usamos bookContentData para agregar su contenido también
+        bookContentData.forEach { (title, text) ->
+            content += "\n$title\n$text\n"
+        }
+
         return content
-    }
-}
+    } }
