@@ -110,7 +110,6 @@ class MainActivity : AppCompatActivity() {
 
 
     // Lista de oraciones y rituales
-    // Lista de oraciones y rituales
     private val oraciones = listOf(
         Pair("Oración a Nuit", """
         Oh Nuit, vasto y eterno misterio,  
@@ -207,80 +206,89 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // Referencias a los botones y vistas
-        val buttonLiberAlVelLegis: Button = findViewById(R.id.buttonLiberAlVelLegis)
-        val buttonLiberII: Button = findViewById(R.id.buttonLiberII)
-        val buttonLiberTzaddi: Button = findViewById(R.id.buttonLiberTzaddi)
-        val buttonOraciones: Button = findViewById(R.id.buttonOraciones)
-        val buttonPreguntas: Button = findViewById(R.id.buttonPreguntas)
-        val scrollView: ScrollView = findViewById(R.id.scrollView)
-        val textView: TextView = findViewById(R.id.textView)
+        val buttonLiberAlVelLegis = findViewById<Button>(R.id.buttonLiberAlVelLegis)
+        val buttonLiberII = findViewById<Button>(R.id.buttonLiberII)
+        val buttonLiberTzaddi = findViewById<Button>(R.id.buttonLiberTzaddi)
+        val buttonOraciones = findViewById<Button>(R.id.buttonOraciones)
+        val buttonPreguntas = findViewById<Button>(R.id.buttonPreguntas)
+        val buttonThemes = findViewById<Button>(R.id.buttonThemes)
+        val scrollView = findViewById<ScrollView>(R.id.scrollView)
+        val textView = findViewById<TextView>(R.id.textView)
+        val chaptersContainer = findViewById<LinearLayout>(R.id.chaptersContainer)
 
-        // Habilitar desplazamiento en el TextView
         textView.movementMethod = ScrollingMovementMethod()
 
-        // Botón para mostrar contenido de Liber AL vel Legis
-        buttonLiberAlVelLegis.setOnClickListener {
-            textView.text = getBookContent("Liber AL vel Legis")
-            scrollView.visibility = View.VISIBLE
-        }
+        // Funcionalidad de los botones de libros
+        buttonLiberAlVelLegis.setOnClickListener { showChapters("Liber AL vel Legis") }
+        buttonLiberII.setOnClickListener { showChapters("Liber II") }
+        buttonLiberTzaddi.setOnClickListener { showChapters("Liber Tzaddi") }
 
-        // Botón para mostrar contenido de Liber II
-        buttonLiberII.setOnClickListener {
-            textView.text = getBookContent("Liber II")
-            scrollView.visibility = View.VISIBLE
-        }
+        // Funcionalidad de los botones principales
+        buttonOraciones.setOnClickListener { showContent(getOracionesContent()) }
+        buttonPreguntas.setOnClickListener { showContent(getPreguntasFrecuentesContent()) }
+        buttonThemes.setOnClickListener { showContent("Aquí irán los temas y versículos") } // TODO: Implementar
 
-        // Botón para mostrar contenido de Liber Tzaddi
-        buttonLiberTzaddi.setOnClickListener {
-            textView.text = getBookContent("Liber Tzaddi")
-            scrollView.visibility = View.VISIBLE
-        }
+        // Ocultar el contenedor de capítulos al principio
+        chaptersContainer.visibility = View.GONE
 
-        // Botón para mostrar oraciones y rituales
-        buttonOraciones.setOnClickListener {
-            textView.text = getOracionesContent()
-            scrollView.visibility = View.VISIBLE
-        }
-
-        // Botón para mostrar preguntas frecuentes
-        buttonPreguntas.setOnClickListener {
-            textView.text = getPreguntasFrecuentesContent()
-            scrollView.visibility = View.VISIBLE
-        }
+        // Ocultar ScrollView al principio
+        scrollView.visibility = View.GONE
     }
 
-    // Función para obtener el contenido de un libro
-    private fun getBookContent(bookName: String): String {
+    private fun showChapters(bookName: String) {
+        val chaptersContainer = findViewById<LinearLayout>(R.id.chaptersContainer)
+        chaptersContainer.removeAllViews() // Limpiar botones anteriores
         val book = bookContentData[bookName]
-        val content = StringBuilder()
-        book?.forEach { (chapter, verses) ->
-            content.append("$chapter\n")
-            verses.forEach { (verse, text) ->
-                content.append("$verse: $text\n")
-            }
-            content.append("\n")
+
+        book?.forEach { (chapter, _) ->
+            val button = Button(this)
+            button.text = chapter
+            button.setOnClickListener { showVerses(bookName, chapter) }
+            chaptersContainer.addView(button)
         }
-        return content.toString()
+
+        chaptersContainer.visibility = View.VISIBLE
+        showContent("") // Ocultar el contenido anterior
     }
 
-    // Función para obtener el contenido de las oraciones
+    private fun showVerses(bookName: String, chapter: String) {
+        val verses = bookContentData[bookName]?.get(chapter)
+        val content = StringBuilder()
+
+        verses?.forEach { (verse, text) ->
+            content.append("$verse: $text\n")
+        }
+
+        showContent(content.toString())
+    }
+
+    private fun showContent(content: String) {
+        val scrollView = findViewById<ScrollView>(R.id.scrollView)
+        val textView = findViewById<TextView>(R.id.textView)
+
+        textView.text = content
+        scrollView.visibility = View.VISIBLE
+    }
+
     private fun getOracionesContent(): String {
         val content = StringBuilder()
+
         oraciones.forEach { (title, text) ->
             content.append("$title\n")
             content.append("$text\n\n")
         }
+
         return content.toString()
     }
 
-    // Función para obtener el contenido de las preguntas frecuentes
     private fun getPreguntasFrecuentesContent(): String {
         val content = StringBuilder()
+
         preguntasFrecuentes.forEach { (question, answer) ->
             content.append("Pregunta: $question\n")
             content.append("Respuesta: $answer\n\n")
         }
+
         return content.toString()
     }
 }
