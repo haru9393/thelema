@@ -38,4 +38,13 @@
     <string name="descriptive_text_for_screen_reader">Botón para acceder a las oraciones y rituales</string>
     <string name="themes_and_verses">Temas y Versículos</string>
     <string name="toca_un_versículo_para_escucharlo">Toca un versículo para escucharlo</string>
+    <string name="titulo_de_la_oracion">Título de la Oración</string>
+    <string name="contenido_de_la_oracion">Contenido de la Oración</string>
+    <string name="back">Volver</string>
+    <string name="share">Compartir</string>
+    <string name="share_verse">Compartir versículo</string>
+    <string name="share_message">📖 %1$s \n\nDescarga la app de Thelema 📲</string>
+    <string name="share_with">Compartir versículo con:</string>
+    <string name="select_verse_first">Selecciona un versículo antes de compartir</string>
+
 </resources>
