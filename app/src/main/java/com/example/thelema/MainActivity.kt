@@ -1,19 +1,21 @@
 package com.example.thelema
-import android.view.View
+
 import android.content.Intent
 import android.os.Bundle
 import android.speech.tts.TextToSpeech
 import android.util.Log
-import android.widget.*
+import android.view.View
+import android.widget.Button
+import android.widget.LinearLayout
+import android.widget.ScrollView
+import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.work.*
-import java.util.*
-import java.util.concurrent.TimeUnit
+import java.util.Locale
 
 class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
 
     private lateinit var tts: TextToSpeech
-
 
     private val bookContentData: Map<String, Map<String, Map<String, String>>> = mapOf(
         "Liber AL vel Legis" to mapOf(
@@ -112,69 +114,55 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         )
     )
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // Inicialización de TTS
         tts = TextToSpeech(this, this)
-
-        // Llamada para agendar notificación diaria
-        scheduleDailyNotification()
 
         val buttonLiberAlVelLegis = findViewById<Button>(R.id.buttonLiberAlVelLegis)
         val buttonLiberIi = findViewById<Button>(R.id.buttonLiberIi)
         val buttonLiberTzaddi = findViewById<Button>(R.id.buttonLiberTzaddi)
-        val buttonThemes = findViewById<Button>(R.id.buttonThemes)
+
+        buttonLiberAlVelLegis.setOnClickListener { showChapters("Liber AL vel Legis") }
+        buttonLiberIi.setOnClickListener { showChapters("Liber II") }
+        buttonLiberTzaddi.setOnClickListener { showChapters("Liber Tzaddi") }
+
         val buttonOraciones = findViewById<Button>(R.id.buttonOraciones)
         val oracionesContainer = findViewById<LinearLayout>(R.id.oracionesContainer)
-
-        // Ocultar el contenedor de oraciones al inicio
         oracionesContainer.visibility = View.GONE
-
-        buttonLiberAlVelLegis.setOnClickListener {
-            showChapters(bookContentData["Liber AL vel Legis"] ?: emptyMap())
-        }
-
-        buttonLiberIi.setOnClickListener {
-            showChapters(bookContentData["Liber II"] ?: emptyMap())
-        }
-
-        buttonLiberTzaddi.setOnClickListener {
-            showChapters(bookContentData["Liber Tzaddi"] ?: emptyMap())
-        }
-
-        buttonThemes.setOnClickListener {
-            val intent = Intent(this, ThemesActivity::class.java)
-            startActivity(intent)
-        }
 
         buttonOraciones.setOnClickListener {
             oracionesContainer.visibility = if (oracionesContainer.visibility == View.GONE) View.VISIBLE else View.GONE
         }
     }
 
-    private fun showChapters(chapters: Map<String, Map<String, String>>) {
+    private fun showChapters(book: String) {
         val themesContainer = findViewById<LinearLayout>(R.id.themesContainer)
-        val textView = findViewById<TextView>(R.id.textView)
-
         themesContainer.removeAllViews()
-        textView.text = getString(R.string.select_verse)
+
+        val chapters = bookContentData[book] ?: emptyMap()
 
         for ((chapter, verses) in chapters) {
             val chapterButton = Button(this)
             chapterButton.text = chapter
-            chapterButton.setOnClickListener { showVerses(verses) }
+            chapterButton.setOnClickListener {
+                showVerses(verses)
+            }
             themesContainer.addView(chapterButton)
         }
     }
 
     private fun showVerses(verses: Map<String, String>) {
         val themesContainer = findViewById<LinearLayout>(R.id.themesContainer)
+        val shareButtonContainer = findViewById<LinearLayout>(R.id.shareButtonContainer)
         val scrollView = findViewById<ScrollView>(R.id.scrollView)
         val textView = findViewById<TextView>(R.id.textView)
 
         themesContainer.removeAllViews()
+        shareButtonContainer.removeAllViews()
+        shareButtonContainer.visibility = View.GONE
 
         var selectedVerse: String? = null
 
@@ -204,7 +192,9 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
                 Toast.makeText(this, getString(R.string.select_verse_first), Toast.LENGTH_SHORT).show()
             }
         }
-        themesContainer.addView(shareButton)
+
+        shareButtonContainer.addView(shareButton)
+        shareButtonContainer.visibility = View.VISIBLE
     }
 
     private fun speakVerse(verseText: String) {
@@ -212,31 +202,6 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
             tts.stop()
         }
         tts.speak(verseText, TextToSpeech.QUEUE_FLUSH, null, null)
-    }
-
-    private fun scheduleDailyNotification() {
-        val calendar = Calendar.getInstance().apply {
-            set(Calendar.HOUR_OF_DAY, 18) // 6:00 PM
-            set(Calendar.MINUTE, 0)
-            set(Calendar.SECOND, 0)
-        }
-
-        val now = Calendar.getInstance()
-        if (calendar.before(now)) {
-            calendar.add(Calendar.DAY_OF_MONTH, 1) // Si ya pasó la hora, programa para mañana
-        }
-
-        val initialDelay = calendar.timeInMillis - now.timeInMillis
-
-        val workRequest = PeriodicWorkRequestBuilder<DailyVerseWorker>(1, TimeUnit.DAYS)
-            .setInitialDelay(initialDelay, TimeUnit.MILLISECONDS)
-            .build()
-
-        WorkManager.getInstance(this).enqueueUniquePeriodicWork(
-            "DailyNotification",
-            ExistingPeriodicWorkPolicy.UPDATE,
-            workRequest
-        )
     }
 
     override fun onInit(status: Int) {
