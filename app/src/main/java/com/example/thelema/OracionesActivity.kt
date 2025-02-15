@@ -117,7 +117,7 @@ class OracionesActivity : AppCompatActivity() {
             // Limpiar el contenedor antes de agregar los nuevos botones
             containerOraciones.removeAllViews()
 
-            // Agregar los botones para las oraciones y rituales sin comprobación
+            // Agregar los botones para las oraciones y rituales
             for ((titulo, contenido) in oraciones) {
                 val button = Button(this).apply {
                     text = titulo
@@ -127,9 +127,8 @@ class OracionesActivity : AppCompatActivity() {
                         textViewContenido.text = contenido
                     }
                 }
-                // Asegúrate de que se añaden correctamente los botones al contenedor
                 containerOraciones.addView(button)
             }
-        } } }
-
-
+        }
+    }
+}
