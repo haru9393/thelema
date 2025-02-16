@@ -39,6 +39,10 @@
         <activity
             android:name=".DetalleOracionActivity"
             android:exported="true"/>
+        <activity android:name=".PreguntasFrecuentesActivity"
+            android:exported="true">
+        </activity>
+
 
         <provider
             android:name="androidx.core.content.FileProvider"

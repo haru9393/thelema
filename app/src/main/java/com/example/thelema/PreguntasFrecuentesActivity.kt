@@ -10,7 +10,7 @@ class PreguntasFrecuentesActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_preguntas_frecuentes)  // Asumiendo que crearemos este layout
+        setContentView(R.layout.activity_preguntas_frecuentes)
 
         val questionsContainer: LinearLayout = findViewById(R.id.questionsContainer)
 
@@ -26,17 +26,29 @@ class PreguntasFrecuentesActivity : AppCompatActivity() {
             Pair("¿Se hacen orgías en Thelema?", "No, en Thelema no se promueven ni se practican orgías. Thelema se centra en la libertad individual, el auto-descubrimiento y el respeto por los demás.")
         )
 
-
-
+        // Agregar preguntas y respuestas dinámicamente
         questions.forEach { (question, answer) ->
             val questionButton = Button(this).apply {
                 text = question
+                contentDescription = question  // Descripción accesible para los botones
                 setOnClickListener {
-                    val textView = TextView(this@PreguntasFrecuentesActivity)
-                    textView.text = answer
-                    questionsContainer.addView(textView)
+                    // Verificar si la respuesta ya está agregada para evitar duplicados
+                    val existingAnswerTextView = questionsContainer.findViewWithTag<TextView>(question)
+                    if (existingAnswerTextView == null) {
+                        // Crear un TextView para la respuesta
+                        val answerTextView = TextView(this@PreguntasFrecuentesActivity).apply {
+                            text = answer
+                            textSize = 16f
+                            setPadding(0, 16, 0, 16)  // Espaciado entre las respuestas
+                            contentDescription = answer // Descripción accesible para las respuestas
+                            tag = question  // Etiqueta única para evitar duplicados
+                        }
+                        // Agregar la respuesta debajo del botón de la pregunta
+                        questionsContainer.addView(answerTextView)
+                    }
                 }
             }
+            // Agregar el botón de la pregunta al contenedor
             questionsContainer.addView(questionButton)
         }
     }

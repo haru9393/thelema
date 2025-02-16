@@ -1,9 +1,7 @@
 <resources>
     <string name="app_name">Thelema</string>
-
     <string name="atras">Atrás</string>
     <string name="volver">Volver</string>
-
     <string name="liber_al_vel_legis">LIBER AL VEL LEGIS</string>
     <string name="liber_ii">LIBER II</string>
     <string name="liber_tzaddi">LIBER TZADDI</string>
@@ -77,9 +75,38 @@
     <string name="book_title">Libro: %1$s</string>
     <string name="chapter_title">Capítulo: %1$s</string>
     <string name="verse_title">Versículo %1$s: %2$s</string>
+
     <string name="preguntas">Preguntas</string>
 
+    <!-- Preguntas frecuentes -->
+    <string name="poder_estudiar_sin_magia">¿Puedo estudiar Thelema sin practicar magia?</string>
+    <string name="respuesta_sin_magia">Sí, puedes estudiar Thelema como una filosofía y aplicarla a tu vida diaria sin necesidad de practicar magia. La base de Thelema es la libertad y el auto-descubrimiento.</string>
 
+    <string name="thelema_comunidad">¿Thelema tiene una comunidad organizada?</string>
+    <string name="respuesta_comunidad">Existen diversas organizaciones y grupos que siguen la filosofía Thelemica, pero Thelema en sí no tiene una jerarquía centralizada ni una estructura religiosa formal. Cada individuo es libre de interpretar y practicar Thelema a su manera.</string>
+
+    <string name="thelema_budismo">¿Es Thelema compatible con el budismo?</string>
+    <string name="respuesta_budismo">Sí, Thelema y el budismo pueden ser compatibles, ya que ambos enfatizan la importancia del autoconocimiento y la evolución personal. La clave es la libertad para practicar según tu propia voluntad.</string>
+
+    <string name="thelema_satanica">¿Es Thelema satánica?</string>
+    <string name="respuesta_satanica">No, Thelema no es una religión satánica. Es una filosofía espiritual y un sistema de creencias que promueve la libertad personal y el auto-descubrimiento.</string>
+
+    <string name="thelema_sacrificios">¿Se realizan sacrificios en Thelema?</string>
+    <string name="respuesta_sacrificios">No, en Thelema no se practican sacrificios. Thelema se enfoca en la evolución personal y el respeto por la libertad y la voluntad de los demás.</string>
+
+    <string name="thelema_magia_negra">¿Thelema está relacionada con la magia negra?</string>
+    <string name="respuesta_magia_negra">No, Thelema no es magia negra. Es una corriente filosófica que utiliza la magia ceremonial como herramienta para alcanzar el autoconocimiento, siempre con respeto y responsabilidad.</string>
+
+    <string name="thelema_relijion">¿Thelema es una religión?</string>
+    <string name="respuesta_relijion">Thelema no se considera una religión en el sentido tradicional. Es más una filosofía o sistema de creencias espirituales, con un enfoque en la libertad y el cumplimiento de la propia voluntad.</string>
+
+    <string name="thelema_otra_religion">¿Puedo practicar Thelema si soy de otra religión?</string>
+    <string name="respuesta_otra_religion">Sí, Thelema es compatible con diversas creencias y prácticas espirituales, siempre que se respete la libertad y la voluntad de cada individuo.</string>
+
+    <string name="thelema_orgias">¿Se hacen orgías en Thelema?</string>
+    <string name="respuesta_orgias">No, en Thelema no se promueven ni se practican orgías. Thelema se centra en la libertad individual, el auto-descubrimiento y el respeto por los demás.</string>
+
+    <string name="desplazamiento_preguntas_frecuentes">Desplazamiento para ver las preguntas frecuentes</string>
 </resources>
 
 
