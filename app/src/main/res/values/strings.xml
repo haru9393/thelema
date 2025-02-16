@@ -1,7 +1,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">Thelema</string>
     <string name="atras">Atrás</string>
-    <string name="volver">Volver</string>
+    <string name="volver">Volver Atrás</string>
     <string name="liber_al_vel_legis">LIBER AL VEL LEGIS</string>
     <string name="liber_ii">LIBER II</string>
     <string name="liber_tzaddi">LIBER TZADDI</string>
@@ -53,12 +53,12 @@
     <string name="example_button_text">Example Button</string>
 
     <!-- Botones de libros -->
-    <string name="button_liber_al_vel_legis">Liber AL vel Legis</string>
+    <string name="button_liber_al_vel_legis" tools:ignore="DuplicateDefinition">Liber AL vel Legis</string>
     <string name="button_liber_al">Liber AL</string>
-    <string name="button_liber_ii">Liber II</string>
-    <string name="button_liber_tzaddi">Liber Tzaddi</string>
-    <string name="button_oraciones">Oraciones</string>
-    <string name="button_preguntas">Preguntas</string>
+    <string name="button_liber_ii" tools:ignore="DuplicateDefinition">Liber II</string>
+    <string name="button_liber_tzaddi" tools:ignore="DuplicateDefinition">Liber Tzaddi</string>
+    <string name="button_oraciones" tools:ignore="DuplicateDefinition">Oraciones</string>
+    <string name="button_preguntas" tools:ignore="DuplicateDefinition">Preguntas</string>
     <string name="button_themes">Temas</string>
 
     <!-- Cadenas para capítulos y versículos -->
@@ -108,10 +108,13 @@
 
     <string name="desplazamiento_preguntas_frecuentes">Desplazamiento para ver las preguntas frecuentes</string>
     <string name="volveratras">Volver</string>
-    <string name="volver_atras" tools:ignore="DuplicateDefinition">Volver Atrás</string>
-
-    <!-- Agrega la cadena aquí -->
-    <string name="empty_text">Texto vacío</string>
+    <string name="ejemplo_texto">ejemplo_texto</string>
+    <string name="accessible_text_for_assistive_technologies">accessible_text_for_assistive_technologies</string>
+    <string name="accessible_text_in_scroll_view">accessible_text_in_scroll_view</string>
+    <string name="scroll_view_description">scroll_view:description</string>
+    <string name="texto_capitulo_versiculo">Texto del capítulo o versículo</string>
 </resources>
+
+
 
 
