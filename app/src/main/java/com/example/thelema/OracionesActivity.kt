@@ -1,13 +1,12 @@
-
 package com.example.thelema
 
-import android.content.Intent
 import android.os.Bundle
+import android.view.MenuItem
 import android.view.View
-import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.ScrollView
 import android.widget.TextView
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 
 class OracionesActivity : AppCompatActivity() {
@@ -102,45 +101,68 @@ class OracionesActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_oraciones)
 
-        val buttonOraciones = findViewById<Button>(R.id.buttonOraciones)
+        // Habilitar el botón de regresar en el ActionBar
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+        // Referencia a los elementos del layout
         val scrollViewContenido = findViewById<ScrollView>(R.id.scrollViewContenido)
-        val contenidoContainer = findViewById<LinearLayout>(R.id.contenidoContainer)
-        val buttonRegresar = findViewById<Button>(R.id.buttonRegresar)
+        val contenidoContainer: LinearLayout = findViewById(R.id.contenidoContainer)
 
-        buttonOraciones.setOnClickListener {
-            if (scrollViewContenido.visibility == View.GONE) {
-                scrollViewContenido.visibility = View.VISIBLE
-                showOraciones(oraciones)
-            } else {
-                scrollViewContenido.visibility = View.GONE
-                contenidoContainer.removeAllViews()
-            }
+        // Agregar Log para depuración
+        Log.d("OracionesActivity", "Contenido container: $contenidoContainer")
+
+        // Asegurarse de que el ScrollView y el LinearLayout estén visibles
+        if (scrollViewContenido.visibility == View.GONE) {
+            scrollViewContenido.visibility = View.VISIBLE
         }
 
-        buttonRegresar.setOnClickListener {
-            finish()
-        }
+        // Llamamos a showOraciones para cargar las oraciones en el contenedor
+        showOraciones(oraciones)
     }
 
     private fun showOraciones(oraciones: List<Pair<String, String>>) {
-        val contenidoContainer = findViewById<LinearLayout>(R.id.contenidoContainer)
+        // Limpiar cualquier vista previa
+        val contenidoContainer: LinearLayout = findViewById(R.id.contenidoContainer)
         contenidoContainer.removeAllViews()
 
+        // Añadir los textos de las oraciones
         for ((titulo, texto) in oraciones) {
-            val tituloTextView = TextView(this)
-            tituloTextView.text = titulo
-            tituloTextView.textSize = 18f
-            tituloTextView.setPadding(0, 8, 0, 8)
-
-            // Hacer clic en el título abre DetalleOracionActivity con el contenido
-            tituloTextView.setOnClickListener {
-                val intent = Intent(this, DetalleOracionActivity::class.java)
-                intent.putExtra("titulo", titulo)
-                intent.putExtra("contenido", texto)
-                startActivity(intent)
+            val tituloTextView = TextView(this).apply {
+                text = titulo
+                textSize = 18f
+                setPadding(0, 8, 0, 8)
             }
 
+            val contenidoTextView = TextView(this).apply {
+                text = texto
+                textSize = 16f
+                setPadding(0, 8, 0, 8)
+                visibility = View.GONE  // Inicialmente está oculto
+            }
+
+            // Acción al hacer clic en el título para mostrar/ocultar el contenido
+            tituloTextView.setOnClickListener {
+                contenidoTextView.visibility = if (contenidoTextView.visibility == View.GONE) {
+                    View.VISIBLE
+                } else {
+                    View.GONE
+                }
+            }
+
+            // Agregar ambos TextViews al LinearLayout
             contenidoContainer.addView(tituloTextView)
+            contenidoContainer.addView(contenidoTextView)
+        }
+    }
+
+    // Sobrescribir la función onOptionsItemSelected para manejar el botón de regreso
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            android.R.id.home -> {
+                finish()  // Cierra la actividad y vuelve a la anterior
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
         }
     }
 }

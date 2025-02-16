@@ -48,22 +48,29 @@
         android:id="@+id/buttonRegresar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"  android:text="@string/regresar"  app:layout_constraintTop_toBottomOf="@+id/textViewOracionesRituales"  app:layout_constraintStart_toStartOf="parent"  app:layout_constraintEnd_toEndOf="parent" /> <ScrollView
-    android:id="@+id/scrollViewContenido"
-    android:layout_width="0dp"
-    android:layout_height="0dp"
-    android:contentDescription="@string/contenido_oraciones_y_rituales"
-    app:layout_constraintTop_toBottomOf="@+id/buttonRegresar"  app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintBottom_toBottomOf="parent"
-    android:visibility="gone">
+        android:layout_marginTop="8dp"
+        android:text="@string/regresar"
+        app:layout_constraintTop_toBottomOf="@+id/textViewOracionesRituales"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
-    <LinearLayout
-        android:id="@+id/contenidoContainer"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="16dp" />
-</ScrollView>
+    <ScrollView
+        android:id="@+id/scrollViewContenido"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:contentDescription="@string/contenido_oraciones_y_rituales"
+        app:layout_constraintTop_toBottomOf="@+id/buttonRegresar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:id="@+id/contenidoContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp" />
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
