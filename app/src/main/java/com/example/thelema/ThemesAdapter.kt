@@ -24,7 +24,8 @@ class ThemesAdapter(context: Context, objects: List<String>) :
         "Duda" to "No dudes de tu camino, pues es el camino de la estrella. (Liber AL vel Legis 2:7)",
         "Gozo" to "Vive con alegría, pues el gozo es poder. (Liber AL vel Legis 2:9)",
         "Estrés" to "Relájate en la danza de la vida. (Liber AL vel Legis 2:22)",
-        "Sanidad" to "El cuerpo es un templo, cuídalo y fortalécelo. (Liber AL vel Legis 2:56)"
+        "Sanidad" to "El cuerpo es un templo, cuídalo y fortalécelo. (Liber AL vel Legis 2:56)",
+        "Depresión" to "No te dejes consumir por la oscuridad, sigue tu voluntad y la luz llegará. (Liber AL vel Legis 3:22)" // Se añade el versículo para Depresión
     )
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {

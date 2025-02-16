@@ -11,6 +11,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var chaptersContainer: LinearLayout
     private lateinit var textView: TextView
+    private lateinit var versesContainer: LinearLayout
 
     private val bookContentData: Map<String, Map<String, Map<String, String>>> = mapOf(
         "Liber AL vel Legis" to mapOf(
@@ -114,13 +115,48 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        // Inicializamos las vistas
         chaptersContainer = findViewById(R.id.chaptersContainer)
         textView = findViewById(R.id.textView)
+        versesContainer = findViewById(R.id.versesContainer)
 
         // Botón de preguntas frecuentes
-        val buttonPreguntas: Button = findViewById(R.id.buttonPreguntas) // Usamos el ID del botón de preguntas
+        val buttonPreguntas: Button = findViewById(R.id.buttonPreguntas)
         buttonPreguntas.setOnClickListener {
             val intent = Intent(this, PreguntasFrecuentesActivity::class.java)
+            startActivity(intent)
+        }
+
+        // Inicializar los botones de los libros
+        val buttonLiberAlVelLegis: Button = findViewById(R.id.buttonLiberAlVelLegis)
+        val buttonLiberII: Button = findViewById(R.id.buttonLiberII)
+        val buttonLiberTzaddi: Button = findViewById(R.id.buttonLiberTzaddi)
+        val buttonOraciones: Button = findViewById(R.id.buttonOraciones)
+        val buttonThemes: Button = findViewById(R.id.buttonThemes)
+
+        // Configuración de los OnClickListener para los botones de libros
+        buttonLiberAlVelLegis.setOnClickListener {
+            showChapters("Liber AL vel Legis")
+        }
+
+        buttonLiberII.setOnClickListener {
+            showChapters("Liber II")
+        }
+
+        buttonLiberTzaddi.setOnClickListener {
+            showChapters("Liber Tzaddi")
+        }
+
+        // Redirigir a OracionesActivity
+        buttonOraciones.setOnClickListener {
+            val intent = Intent(this, OracionesActivity::class.java)
+            startActivity(intent)
+        }
+
+        // Acción para el botón de Temas
+        buttonThemes.setOnClickListener {
+            // Redirigir a ThemesActivity
+            val intent = Intent(this, ThemesActivity::class.java)
             startActivity(intent)
         }
 
@@ -128,22 +164,27 @@ class MainActivity : AppCompatActivity() {
         showBooks()
     }
 
+
+    // Mostrar los botones de los libros
     private fun showBooks() {
         chaptersContainer.removeAllViews()
 
+        // Lista de libros a mostrar
         val books = listOf("Liber AL vel Legis", "Liber II", "Liber Tzaddi")
         books.forEach { bookName ->
             val bookButton = Button(this).apply {
                 text = bookName
                 setOnClickListener {
-                    showChapters(bookName)
+                    showChapters(bookName)  // Mostrar los capítulos cuando el botón sea presionado
                 }
             }
             chaptersContainer.addView(bookButton)
         }
     }
 
+    // Mostrar los capítulos de un libro seleccionado
     private fun showChapters(bookName: String) {
+        // Asumiendo que 'bookContentData' es un mapa que contiene los capítulos y versículos de cada libro
         val chapters = bookContentData[bookName] ?: return
 
         chaptersContainer.removeAllViews()
@@ -152,34 +193,31 @@ class MainActivity : AppCompatActivity() {
             val chapterButton = Button(this).apply {
                 text = getString(R.string.chapter_title, chapterName)
                 setOnClickListener {
-                    showVerses(bookName, chapterName, verses)
+                    showVerses(bookName, chapterName, verses)  // Mostrar los versículos del capítulo cuando se presione
                 }
             }
             chaptersContainer.addView(chapterButton)
         }
     }
 
+    // Mostrar los versículos de un capítulo seleccionado
     private fun showVerses(bookName: String, chapterName: String, verses: Map<String, String>) {
         val chapterTitle = getString(R.string.book_title, bookName) + "\n" + getString(R.string.chapter_title, chapterName)
-        textView.text = chapterTitle
+        textView.text = chapterTitle  // Actualizar el título del capítulo en el TextView
 
-        // Obtén versesContainer desde el archivo de diseño XML
-        val versesContainer = findViewById<LinearLayout>(R.id.versesContainer)
-            ?: throw IllegalStateException("versesContainer no encontrado en el diseño!")
-
-        versesContainer.removeAllViews()
+        versesContainer.removeAllViews()  // Limpiar los versículos previos
 
         verses.forEach { (verseName, verseText) ->
             val verseButton = Button(this).apply {
                 text = getString(R.string.verse_title, verseName, verseText)
                 setOnClickListener {
+                    // Mostrar el texto del versículo seleccionado en el TextView
                     textView.text = getString(R.string.verse_title, verseName, verseText)
                 }
             }
-            versesContainer.addView(verseButton)
+            versesContainer.addView(verseButton)  // Agregar el botón del versículo
         }
 
-        chaptersContainer.removeAllViews() // Limpiar los botones de los capítulos
-        chaptersContainer.addView(versesContainer) // Agregar los versículos a la vista
+        chaptersContainer.removeAllViews()  // Limpiar los botones de los capítulos
+        chaptersContainer.addView(versesContainer)  // Agregar el contenedor de versículos a la vista
     } }
-

@@ -14,7 +14,7 @@ class ThemesActivity : AppCompatActivity() {
 
     private val themes = listOf(
         "Amor", "Enojo", "Ansiedad", "Esperanza", "Paz", "Temor",
-        "Paciencia", "Orgullo", "Tentación", "Duda", "Gozo", "Estrés", "Sanidad"
+        "Paciencia", "Orgullo", "Tentación", "Duda", "Gozo", "Estrés", "Sanidad", "Depresión" // Se añade Depresión
     )
 
     private val verses = mapOf(
@@ -30,7 +30,8 @@ class ThemesActivity : AppCompatActivity() {
         "Duda" to "No dudes de tu camino, pues es el camino de la estrella. (Liber AL vel Legis 2:7)",
         "Gozo" to "Vive con alegría, pues el gozo es poder. (Liber AL vel Legis 2:9)",
         "Estrés" to "Relájate en la danza de la vida. (Liber AL vel Legis 2:22)",
-        "Sanidad" to "El cuerpo es un templo, cuídalo y fortalécelo. (Liber AL vel Legis 2:56)"
+        "Sanidad" to "El cuerpo es un templo, cuídalo y fortalécelo. (Liber AL vel Legis 2:56)",
+        "Depresión" to "No te dejes consumir por la oscuridad, sigue tu voluntad y la luz llegará. (Liber AL vel Legis 3:22)" // Se añade el versículo para Depresión
     )
 
     private lateinit var verseTextView: TextView
