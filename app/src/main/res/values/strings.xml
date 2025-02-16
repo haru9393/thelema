@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">Thelema</string>
     <string name="atras">Atrás</string>
     <string name="volver">Volver</string>
@@ -108,11 +108,10 @@
 
     <string name="desplazamiento_preguntas_frecuentes">Desplazamiento para ver las preguntas frecuentes</string>
     <string name="volveratras">Volver</string>
+    <string name="volver_atras" tools:ignore="DuplicateDefinition">Volver Atrás</string>
+
+    <!-- Agrega la cadena aquí -->
+    <string name="empty_text">Texto vacío</string>
 </resources>
-
-
-
-
-
 
 

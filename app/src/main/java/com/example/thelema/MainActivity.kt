@@ -2,6 +2,8 @@ package com.example.thelema
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
+import android.util.Log
 import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -164,7 +166,6 @@ class MainActivity : AppCompatActivity() {
         showBooks()
     }
 
-
     // Mostrar los botones de los libros
     private fun showBooks() {
         chaptersContainer.removeAllViews()
@@ -182,25 +183,25 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    // Mostrar los capítulos de un libro seleccionado
     private fun showChapters(bookName: String) {
         // Asumiendo que 'bookContentData' es un mapa que contiene los capítulos y versículos de cada libro
         val chapters = bookContentData[bookName] ?: return
 
-        chaptersContainer.removeAllViews()
+        // Mostrar los botones de los capítulos
+        chaptersContainer.removeAllViews() // Limpiar el contenedor de capítulos
 
         chapters.forEach { (chapterName, verses) ->
+            Log.d("MainActivity", "Agregando capítulo: $chapterName")
             val chapterButton = Button(this).apply {
                 text = getString(R.string.chapter_title, chapterName)
                 setOnClickListener {
                     showVerses(bookName, chapterName, verses)  // Mostrar los versículos del capítulo cuando se presione
                 }
             }
-            chaptersContainer.addView(chapterButton)
+            chaptersContainer.addView(chapterButton)  // Agregar los botones de los capítulos
         }
     }
 
-    // Mostrar los versículos de un capítulo seleccionado
     private fun showVerses(bookName: String, chapterName: String, verses: Map<String, String>) {
         val chapterTitle = getString(R.string.book_title, bookName) + "\n" + getString(R.string.chapter_title, chapterName)
         textView.text = chapterTitle  // Actualizar el título del capítulo en el TextView
@@ -211,6 +212,7 @@ class MainActivity : AppCompatActivity() {
             val verseButton = Button(this).apply {
                 text = getString(R.string.verse_title, verseName, verseText)
                 setOnClickListener {
+                    Log.d("MainActivity", "Versículo presionado: $verseName")
                     // Mostrar el texto del versículo seleccionado en el TextView
                     textView.text = getString(R.string.verse_title, verseName, verseText)
                 }
@@ -218,6 +220,8 @@ class MainActivity : AppCompatActivity() {
             versesContainer.addView(verseButton)  // Agregar el botón del versículo
         }
 
-        chaptersContainer.removeAllViews()  // Limpiar los botones de los capítulos
-        chaptersContainer.addView(versesContainer)  // Agregar el contenedor de versículos a la vista
+        // Muestra solo los versículos y oculta los botones de los capítulos
+        chaptersContainer.visibility = View.GONE
+        versesContainer.visibility = View.VISIBLE
     } }
+

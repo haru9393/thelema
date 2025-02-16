@@ -1,6 +1,7 @@
 package com.example.thelema
 
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -69,8 +70,8 @@ class PreguntasFrecuentesActivity : AppCompatActivity() {
         onBackPressedDispatcher.addCallback(this, callback)
     }
 
-    // Si decides agregar la funcionalidad de "Volver atrás" desde un botón personalizado
-    fun volverAtras() {
-        finish()  // Esto también finaliza la actividad, volviendo atrás
+    // Método con la firma correcta para ser usado en el XML
+    fun volverAtras(view: View) {
+        finish()  // Esto finaliza la actividad y regresa a la anterior
     }
 }
