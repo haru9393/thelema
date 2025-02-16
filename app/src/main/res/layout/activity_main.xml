@@ -69,6 +69,7 @@
             android:textColor="@color/thelema_dorado"
             style="?android:attr/buttonBarButtonStyle"/>
 
+        <!-- Aquí se agrega el botón preguntas -->
         <Button
             android:id="@+id/buttonPreguntas"
             android:layout_width="wrap_content"
@@ -94,6 +95,7 @@
             android:background="@drawable/boton_thelema"
             android:textColor="@color/thelema_dorado"
             style="?android:attr/buttonBarButtonStyle"/>
+
     </LinearLayout>
 
     <!-- ScrollView para el contenido -->

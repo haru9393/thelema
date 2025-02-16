@@ -1,5 +1,6 @@
 package com.example.thelema
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.LinearLayout
@@ -116,6 +117,13 @@ class MainActivity : AppCompatActivity() {
         chaptersContainer = findViewById(R.id.chaptersContainer)
         textView = findViewById(R.id.textView)
 
+        // Botón de preguntas frecuentes
+        val buttonPreguntas: Button = findViewById(R.id.buttonPreguntas) // Usamos el ID del botón de preguntas
+        buttonPreguntas.setOnClickListener {
+            val intent = Intent(this, PreguntasFrecuentesActivity::class.java)
+            startActivity(intent)
+        }
+
         // Mostrar los libros
         showBooks()
     }
@@ -155,9 +163,11 @@ class MainActivity : AppCompatActivity() {
         val chapterTitle = getString(R.string.book_title, bookName) + "\n" + getString(R.string.chapter_title, chapterName)
         textView.text = chapterTitle
 
-        val versesContainer = LinearLayout(this).apply {
-            orientation = LinearLayout.VERTICAL
-        }
+        // Obtén versesContainer desde el archivo de diseño XML
+        val versesContainer = findViewById<LinearLayout>(R.id.versesContainer)
+            ?: throw IllegalStateException("versesContainer no encontrado en el diseño!")
+
+        versesContainer.removeAllViews()
 
         verses.forEach { (verseName, verseText) ->
             val verseButton = Button(this).apply {
@@ -169,7 +179,7 @@ class MainActivity : AppCompatActivity() {
             versesContainer.addView(verseButton)
         }
 
-        chaptersContainer.removeAllViews()
-        chaptersContainer.addView(versesContainer)
-    }
-}
+        chaptersContainer.removeAllViews() // Limpiar los botones de los capítulos
+        chaptersContainer.addView(versesContainer) // Agregar los versículos a la vista
+    } }
+
