@@ -23,8 +23,13 @@ class PreguntasFrecuentesActivity : AppCompatActivity() {
             Pair("¿Thelema está relacionada con la magia negra?", "No, Thelema no es magia negra. Es una corriente filosófica que utiliza la magia ceremonial como herramienta para alcanzar el autoconocimiento, siempre con respeto y responsabilidad."),
             Pair("¿Thelema es una religión?", "Thelema no se considera una religión en el sentido tradicional. Es más una filosofía o sistema de creencias espirituales, con un enfoque en la libertad y el cumplimiento de la propia voluntad."),
             Pair("¿Puedo practicar Thelema si soy de otra religión?", "Sí, Thelema es compatible con diversas creencias y prácticas espirituales, siempre que se respete la libertad y la voluntad de cada individuo."),
-            Pair("¿Se hacen orgías en Thelema?", "No, en Thelema no se promueven ni se practican orgías. Thelema se centra en la libertad individual, el auto-descubrimiento y el respeto por los demás.")
+            Pair("¿Se hacen orgías en Thelema?", "No, en Thelema no se promueven ni se practican orgías. Thelema se centra en la libertad individual, el auto-descubrimiento y el respeto por los demás."),
+            Pair("¿Cuál es el objetivo principal de Thelema?", "El objetivo principal de Thelema es el autoconocimiento y la búsqueda de la verdadera voluntad de cada individuo, basada en la libertad personal y el respeto por la voluntad de los demás."),
+            Pair("¿Thelema está relacionada con la religión cristiana?", "No, Thelema no está relacionada con la religión cristiana. Aunque comparte ciertos principios éticos, Thelema es una filosofía que se enfoca en la libertad individual y el cumplimiento de la propia voluntad, sin seguir dogmas religiosos."),
+            Pair("¿Cómo puedo saber cuál es mi verdadera voluntad?", "El autoconocimiento es clave para descubrir tu verdadera voluntad. A través de la meditación, la introspección y el estudio de los principios de Thelema, cada individuo puede llegar a comprender su camino y propósito en la vida."),
+            Pair("¿Thelema está relacionada con el Tarot?", "Thelema tiene una relación estrecha con el Tarot, especialmente con el Tarot de Aleister Crowley (Thoth Tarot). El Tarot es una herramienta utilizada para el autoconocimiento y la interpretación simbólica dentro de la filosofía Thelemica.")
         )
+
 
         // Agregar preguntas y respuestas dinámicamente
         questions.forEach { (question, answer) ->
@@ -52,4 +57,10 @@ class PreguntasFrecuentesActivity : AppCompatActivity() {
             questionsContainer.addView(questionButton)
         }
     }
+
+    // Método para regresar a la actividad anterior
+    fun volverAtras() {
+        finish()  // Finaliza la actividad y regresa a la anterior
+    }
 }
+
