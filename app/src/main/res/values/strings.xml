@@ -48,21 +48,42 @@
     <string name="liber_al">Liber AL</string>
     <string name="oraciones">Oraciones</string>
     <string name="preguntas_frecuentes">Preguntas Frecuentes</string>
-    <string name="titulo_de_la_oracion">titulo_de_la_oracion</string>
-    <string name="contenido_de_la_oracion">contenido_de_la_oracion</string>
-    <string name="preguntas">preguntas</string>
-    <string name="share">share</string>
-    <string name="back">back</string>
+    <string name="titulo_de_la_oracion">Título de la Oración</string>
+    <string name="contenido_de_la_oracion">Contenido de la Oración</string>
+    <string name="preguntas">Preguntas</string>
+    <string name="share">Compartir</string>
+    <string name="back">Atrás</string>
     <string name="example_button_text">Example Button</string>
-        <string name="button_liber_al_vel_legis">Liber AL vel Legis</string>
-        <string name="button_liber_al">Liber AL</string>
-        <string name="button_liber_ii">Liber II</string>
-        <string name="button_liber_tzaddi">Liber Tzaddi</string>
-        <string name="button_oraciones">Oraciones</string>
-        <string name="button_preguntas">Preguntas</string>
-        <string name="button_themes">Themes</string>
-    <string name="chapter_title">Capítulo: %1$s</string>
+
+    <!-- Botones de libros -->
+    <string name="button_liber_al_vel_legis">Liber AL vel Legis</string>
+    <string name="button_liber_al">Liber AL</string>
+    <string name="button_liber_ii">Liber II</string>
+    <string name="button_liber_tzaddi">Liber Tzaddi</string>
+    <string name="button_oraciones">Oraciones</string>
+    <string name="button_preguntas">Preguntas</string>
+    <string name="button_themes">Temas</string>
+
+    <!-- Cadenas para capítulos y versículos -->
     <string name="no_content_available">No hay contenido disponible para este libro.</string>
-    <string name="verse_format">%1$s: %2$s</string>
+
+    <!-- Contenido del libro Liber AL vel Legis -->
+    <string name="book_liber_al_vel_legis">Liber AL vel Legis</string>
+    <string name="chapter_prefix">Capítulo</string>
+    <string name="verse_prefix">Versículo</string>
+    <string name="book_chapter_title">Libro: %1$s, Capítulo: %2$s</string>
+    <string name="verse_format">Versículo %1$s: %2$s</string>
+
+    <!-- Cadenas para título de libro, capítulo y versículo -->
+    <string name="book_title">Libro: %1$s</string>
+    <string name="chapter_title">Capítulo: %1$s</string>
+    <string name="verse_title">Versículo %1$s: %2$s</string>
 
 </resources>
+
+
+
+
+
+
+
