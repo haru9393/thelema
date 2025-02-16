@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 
 class PreguntasFrecuentesActivity : AppCompatActivity() {
@@ -30,7 +31,6 @@ class PreguntasFrecuentesActivity : AppCompatActivity() {
             Pair("¿Thelema está relacionada con el Tarot?", "Thelema tiene una relación estrecha con el Tarot, especialmente con el Tarot de Aleister Crowley (Thoth Tarot). El Tarot es una herramienta utilizada para el autoconocimiento y la interpretación simbólica dentro de la filosofía Thelemica.")
         )
 
-
         // Agregar preguntas y respuestas dinámicamente
         questions.forEach { (question, answer) ->
             val questionButton = Button(this).apply {
@@ -56,11 +56,21 @@ class PreguntasFrecuentesActivity : AppCompatActivity() {
             // Agregar el botón de la pregunta al contenedor
             questionsContainer.addView(questionButton)
         }
+
+        // Crear un callback para el botón de retroceso
+        val callback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                // Aquí puedes colocar lo que quieras que pase al presionar el botón de retroceso
+                finish()  // Esto es equivalente a 'volver atrás'
+            }
+        }
+
+        // Registrar el callback para el botón de retroceso
+        onBackPressedDispatcher.addCallback(this, callback)
     }
 
-    // Método para regresar a la actividad anterior
+    // Si decides agregar la funcionalidad de "Volver atrás" desde un botón personalizado
     fun volverAtras() {
-        finish()  // Finaliza la actividad y regresa a la anterior
+        finish()  // Esto también finaliza la actividad, volviendo atrás
     }
 }
-
