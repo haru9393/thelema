@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity
 class MainActivity : AppCompatActivity() {
 
     // Declaración de variables para las vistas
+    private lateinit var buttonBack: Button  // Declare at class level
     private lateinit var chaptersContainer: LinearLayout
     private lateinit var chapterTitleTextView: TextView
     private lateinit var verseTextView: TextView
@@ -130,7 +131,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // Inicialización de vistas
+        // Initialize views
         chaptersContainer = findViewById(R.id.chaptersContainer)
         chapterTitleTextView = findViewById(R.id.chapterTitleTextView)
         verseTextView = findViewById(R.id.verseTextView)
@@ -138,16 +139,18 @@ class MainActivity : AppCompatActivity() {
         chaptersScrollView = findViewById(R.id.chaptersScrollView)
         versesScrollView = findViewById(R.id.versesScrollView)
         buttonsContainer = findViewById(R.id.buttonsContainer)
+        buttonBack = findViewById(R.id.buttonBack)
 
-        // Botones
-        val buttonLiberAlVelLegis: Button = findViewById(R.id.buttonLiberAlVelLegis)
-        val buttonLiberII: Button = findViewById(R.id.buttonLiberII)
-        val buttonLiberTzaddi: Button = findViewById(R.id.buttonLiberTzaddi)
-        val buttonOraciones: Button = findViewById(R.id.buttonOraciones)
-        val buttonPreguntas: Button = findViewById(R.id.buttonPreguntas)
-        val buttonThemes: Button = findViewById(R.id.buttonThemes)
+        // Buttons
+        val buttonLiberAlVelLegis = findViewById<Button>(R.id.buttonLiberAlVelLegis)
+        val buttonLiberII = findViewById<Button>(R.id.buttonLiberII)
+        val buttonLiberTzaddi = findViewById<Button>(R.id.buttonLiberTzaddi)
+        val buttonOraciones = findViewById<Button>(R.id.buttonOraciones)
+        val buttonPreguntas = findViewById<Button>(R.id.buttonPreguntas)
+        val buttonThemes = findViewById<Button>(R.id.buttonThemes)
 
-        // Listeners de botones
+
+        // Button Listeners
         buttonLiberAlVelLegis.setOnClickListener { showChapters(LIBER_AL_VEL_LEGIS) }
         buttonLiberII.setOnClickListener { showChapters(LIBER_II) }
         buttonLiberTzaddi.setOnClickListener { showChapters(LIBER_TZADDI) }
@@ -164,6 +167,10 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        buttonBack.setOnClickListener {
+            finish()
+        }
+
         showBooks()
     }
 
@@ -174,6 +181,7 @@ class MainActivity : AppCompatActivity() {
         chapterTitleTextView.visibility = View.GONE
         verseTextView.visibility = View.GONE
         buttonsContainer.visibility = View.VISIBLE
+        buttonBack.visibility = View.GONE
 
         val books = listOf(LIBER_AL_VEL_LEGIS, LIBER_II, LIBER_TZADDI)
         books.forEach { bookName ->
@@ -197,42 +205,26 @@ class MainActivity : AppCompatActivity() {
         chapterTitleTextView.visibility = View.GONE
         verseTextView.visibility = View.GONE
         buttonsContainer.visibility = View.GONE
+        buttonBack.visibility = View.VISIBLE
 
         chapters.forEach { (chapterName, _) ->
             val chapterButton = Button(this).apply {
                 text = getString(R.string.chapter_title, chapterName)
-                setOnClickListener { showVerses(bookName, chapterName) }
+                setOnClickListener {
+                    val intent = Intent(this@MainActivity, ChapterActivity::class.java)
+                    intent.putExtra("bookName", bookName)
+                    intent.putExtra("chapterName", chapterName)
+
+                    // Correctly use Bundle:
+                    val bundle = Bundle()
+                    bookContentData[bookName]?.get(chapterName)?.forEach { (verseName, verseText) ->
+                        bundle.putString(verseName, verseText)
+                    }
+                    intent.putExtra("chapterData", bundle) // Put the Bundle
+
+                    startActivity(intent)
+                }
             }
             chaptersContainer.addView(chapterButton)
         }
-    }
-
-    private fun showVerses(bookName: String, chapterName: String) {
-        val verses = bookContentData[bookName]?.get(chapterName) ?: run {
-            println("Error: Capítulo no encontrado: $chapterName en $bookName")
-            return
-        }
-
-        // Formatear el título del capítulo usando String.format() y el recurso de cadena
-        val chapterTitle = String.format(
-            getString(R.string.chapter_title_format), // Recurso de cadena con marcadores de posición
-            getString(R.string.book_title, bookName), // Título del libro
-            getString(R.string.chapter_title, chapterName) // Título del capítulo
-        )
-        chapterTitleTextView.text = chapterTitle
-        chapterTitleTextView.visibility = View.VISIBLE
-
-        versesContainer.removeAllViews()
-        chaptersScrollView.visibility = View.GONE
-        versesScrollView.visibility = View.VISIBLE
-        verseTextView.visibility = View.VISIBLE
-
-        verses.forEach { (verseName, verseText) ->
-            val verseButton = Button(this).apply {
-                text = verseName
-                setOnClickListener { verseTextView.text = verseText }
-            }
-            versesContainer.addView(verseButton)
-        }
-    }
-}
+    } }

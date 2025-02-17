@@ -29,6 +29,14 @@
         </activity>
 
         <activity
+            android:name=".ChapterActivity"  android:exported="false"
+            android:parentActivityName=".MainActivity"/>
+
+        <activity
+            android:name=".VerseActivity"    android:exported="false"
+            android:parentActivityName=".ChapterActivity"/>
+
+        <activity
             android:name=".ThemesActivity"
             android:exported="false"/>
 
@@ -39,10 +47,10 @@
         <activity
             android:name=".DetalleOracionActivity"
             android:exported="true"/>
+
         <activity android:name=".PreguntasFrecuentesActivity"
             android:exported="true">
         </activity>
-
 
         <provider
             android:name="androidx.core.content.FileProvider"
