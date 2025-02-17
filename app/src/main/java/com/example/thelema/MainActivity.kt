@@ -2,30 +2,33 @@ package com.example.thelema
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.ScrollView
 import android.view.View
 import android.widget.Button
 import android.widget.LinearLayout
+import android.widget.ScrollView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
 
+    // Declaración de variables para las vistas
     private lateinit var chaptersContainer: LinearLayout
     private lateinit var chapterTitleTextView: TextView
     private lateinit var verseTextView: TextView
     private lateinit var versesContainer: LinearLayout
-    private lateinit var chaptersScrollView: ScrollView  // Declaración de chaptersScrollView
-    private lateinit var versesScrollView: ScrollView    // Declaración de versesScrollView
-    private lateinit var buttonsContainer: LinearLayout   // Declaración de buttonsContainer
+    private lateinit var chaptersScrollView: ScrollView
+    private lateinit var versesScrollView: ScrollView
+    private lateinit var buttonsContainer: LinearLayout
 
-    // Constantes para los nombres de los libros (mejor práctica)
+    // Constantes para los nombres de los libros
     companion object {
         const val LIBER_AL_VEL_LEGIS = "Liber AL vel Legis"
         const val LIBER_II = "Liber II"
         const val LIBER_TZADDI = "Liber Tzaddi"
     }
 
+    // Datos de ejemplo para los libros, capítulos y versículos
+    // **RECUERDA: Debes reemplazar estos datos con los tuyos.**
     private val bookContentData: Map<String, Map<String, Map<String, String>>> = mapOf(
         LIBER_AL_VEL_LEGIS to mapOf(
             "Capítulo 1" to mapOf(
@@ -127,17 +130,16 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // Inicialización de vistas (asegúrate de que los IDs coinciden con tu layout)
+        // Inicialización de vistas
         chaptersContainer = findViewById(R.id.chaptersContainer)
         chapterTitleTextView = findViewById(R.id.chapterTitleTextView)
         verseTextView = findViewById(R.id.verseTextView)
         versesContainer = findViewById(R.id.versesContainer)
-        chaptersScrollView = findViewById(R.id.chaptersScrollView) // Inicialización
-        versesScrollView = findViewById(R.id.versesScrollView)   // Inicialización
-        buttonsContainer = findViewById(R.id.buttonsContainer)  // Inicialización
+        chaptersScrollView = findViewById(R.id.chaptersScrollView)
+        versesScrollView = findViewById(R.id.versesScrollView)
+        buttonsContainer = findViewById(R.id.buttonsContainer)
 
-
-        // Botones de libros (dentro del LinearLayout buttonsContainer)
+        // Botones
         val buttonLiberAlVelLegis: Button = findViewById(R.id.buttonLiberAlVelLegis)
         val buttonLiberII: Button = findViewById(R.id.buttonLiberII)
         val buttonLiberTzaddi: Button = findViewById(R.id.buttonLiberTzaddi)
@@ -145,8 +147,7 @@ class MainActivity : AppCompatActivity() {
         val buttonPreguntas: Button = findViewById(R.id.buttonPreguntas)
         val buttonThemes: Button = findViewById(R.id.buttonThemes)
 
-
-        // OnClickListeners (usando las constantes para los nombres de los libros)
+        // Listeners de botones
         buttonLiberAlVelLegis.setOnClickListener { showChapters(LIBER_AL_VEL_LEGIS) }
         buttonLiberII.setOnClickListener { showChapters(LIBER_II) }
         buttonLiberTzaddi.setOnClickListener { showChapters(LIBER_TZADDI) }
@@ -163,16 +164,16 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        showBooks() // Mostrar los libros al iniciar la actividad
+        showBooks()
     }
 
     private fun showBooks() {
         chaptersContainer.removeAllViews()
-        chaptersScrollView.visibility = View.GONE // Ocultar el ScrollView de capítulos
-        versesScrollView.visibility = View.GONE // Ocultar el ScrollView de versículos
-        verseTextView.visibility = View.GONE // Ocultar el TextView de versículo
-        buttonsContainer.visibility = View.VISIBLE // Mostrar el contenedor de botones de libros
-
+        chaptersScrollView.visibility = View.GONE
+        versesScrollView.visibility = View.GONE
+        chapterTitleTextView.visibility = View.GONE
+        verseTextView.visibility = View.GONE
+        buttonsContainer.visibility = View.VISIBLE
 
         val books = listOf(LIBER_AL_VEL_LEGIS, LIBER_II, LIBER_TZADDI)
         books.forEach { bookName ->
@@ -191,10 +192,11 @@ class MainActivity : AppCompatActivity() {
         }
 
         chaptersContainer.removeAllViews()
-        chaptersScrollView.visibility = View.VISIBLE // Mostrar ScrollView de capítulos
-        versesScrollView.visibility = View.GONE // Ocultar ScrollView de versículos
-        verseTextView.visibility = View.GONE // Ocultar TextView de versículo
-        buttonsContainer.visibility = View.GONE // Ocultar el contenedor de botones de libros
+        chaptersScrollView.visibility = View.VISIBLE
+        versesScrollView.visibility = View.GONE
+        chapterTitleTextView.visibility = View.GONE
+        verseTextView.visibility = View.GONE
+        buttonsContainer.visibility = View.GONE
 
         chapters.forEach { (chapterName, _) ->
             val chapterButton = Button(this).apply {
@@ -211,13 +213,19 @@ class MainActivity : AppCompatActivity() {
             return
         }
 
-        val chapterTitle = getString(R.string.book_title, bookName) + "\n" + getString(R.string.chapter_title, chapterName)
+        // Formatear el título del capítulo usando String.format() y el recurso de cadena
+        val chapterTitle = String.format(
+            getString(R.string.chapter_title_format), // Recurso de cadena con marcadores de posición
+            getString(R.string.book_title, bookName), // Título del libro
+            getString(R.string.chapter_title, chapterName) // Título del capítulo
+        )
         chapterTitleTextView.text = chapterTitle
+        chapterTitleTextView.visibility = View.VISIBLE
 
         versesContainer.removeAllViews()
-        chaptersScrollView.visibility = View.GONE // Ocultar ScrollView de capítulos
-        versesScrollView.visibility = View.VISIBLE // Mostrar ScrollView de versículos
-        verseTextView.visibility = View.VISIBLE // Mostrar TextView de versículo
+        chaptersScrollView.visibility = View.GONE
+        versesScrollView.visibility = View.VISIBLE
+        verseTextView.visibility = View.VISIBLE
 
         verses.forEach { (verseName, verseText) ->
             val verseButton = Button(this).apply {

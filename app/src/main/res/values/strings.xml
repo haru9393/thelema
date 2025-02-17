@@ -97,6 +97,7 @@
     <string name="verse_text">verse_text</string>
     <string name="back">Regresar</string>
     <string name="share">Compartir</string>
+    <string name="chapter_title_format">%1$s%n%2$s</string>
 
 
 </resources>
