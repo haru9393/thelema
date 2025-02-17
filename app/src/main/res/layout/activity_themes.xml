@@ -7,6 +7,7 @@
     android:padding="16dp"
     tools:context=".ThemesActivity">
 
+    <!-- Botón de regreso -->
     <Button
         android:id="@+id/buttonBack"
         android:layout_width="wrap_content"
@@ -17,8 +18,9 @@
         android:textColor="@color/thelema_dorado"
         android:layout_marginBottom="8dp"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent" />
 
+    <!-- ListView para los temas -->
     <ListView
         android:id="@+id/themesListView"
         android:layout_width="0dp"
@@ -28,8 +30,12 @@
         app:layout_constraintTop_toBottomOf="@id/buttonBack"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/verseTextView"/>
+        app:layout_constraintBottom_toTopOf="@id/verseTextView"
+        android:overScrollMode="never"
+        android:divider="@android:color/darker_gray"
+        android:dividerHeight="0.5dp" />
 
+    <!-- TextView para mostrar el versículo -->
     <TextView
         android:id="@+id/verseTextView"
         android:layout_width="0dp"
@@ -42,8 +48,9 @@
         android:textSize="16sp"
         app:layout_constraintTop_toBottomOf="@id/themesListView"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent" />
 
+    <!-- Botón para compartir -->
     <Button
         android:id="@+id/buttonShare"
         android:layout_width="wrap_content"
@@ -56,7 +63,8 @@
         app:layout_constraintTop_toBottomOf="@id/verseTextView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
 

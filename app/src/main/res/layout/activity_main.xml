@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <!-- Contenedor para los botones de los libros -->
     <LinearLayout
         android:id="@+id/buttonsContainer"
         android:layout_width="0dp"
@@ -101,11 +102,36 @@
 
     </LinearLayout>
 
+    <!-- TextView para mostrar el título del capítulo -->
+    <TextView
+        android:id="@+id/chapterTitleTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/chapter_title"
+        android:textSize="20sp"
+        android:textAlignment="center"
+        android:padding="16dp"
+        app:layout_constraintTop_toBottomOf="@id/buttonsContainer"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Contenedor para los botones de los capítulos -->
+    <LinearLayout
+        android:id="@+id/chaptersContainer"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@id/chapterTitleTextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:visibility="gone" />
+
+    <!-- ScrollView para mostrar el contenido -->
     <ScrollView
         android:id="@+id/scrollView"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/buttonsContainer"
+        app:layout_constraintTop_toBottomOf="@id/chaptersContainer"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -121,16 +147,7 @@
 
     </ScrollView>
 
-    <LinearLayout
-        android:id="@+id/chaptersContainer"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@id/buttonsContainer"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:visibility="gone" />
-
+    <!-- Contenedor para los versículos -->
     <LinearLayout
         android:id="@+id/versesContainer"
         android:layout_width="0dp"
@@ -141,7 +158,21 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:visibility="gone" />
 
+    <!-- TextView para mostrar el texto del versículo -->
+    <TextView
+        android:id="@+id/verseTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/verse_text"
+        android:textSize="16sp"
+        android:padding="16dp"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/versesContainer"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 
 
