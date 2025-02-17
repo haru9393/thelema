@@ -1,9 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- Contenedor de los botones -->
     <LinearLayout
         android:id="@+id/buttonsContainer"
         android:layout_width="0dp"
@@ -15,7 +15,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
-        <!-- Botones de los libros -->
         <Button
             android:id="@+id/buttonLiberAlVelLegis"
             android:layout_width="wrap_content"
@@ -102,7 +101,6 @@
 
     </LinearLayout>
 
-    <!-- ScrollView para el contenido -->
     <ScrollView
         android:id="@+id/scrollView"
         android:layout_width="0dp"
@@ -121,10 +119,8 @@
             android:textSize="18sp"
             android:layout_gravity="center" />
 
-
     </ScrollView>
 
-    <!-- Contenedores de capítulos y versículos -->
     <LinearLayout
         android:id="@+id/chaptersContainer"
         android:layout_width="0dp"
@@ -136,41 +132,11 @@
         android:visibility="gone" />
 
     <LinearLayout
-        android:id="@+id/chaptersLiberAlVelLegis"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@id/chaptersContainer"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:visibility="gone" />
-
-    <LinearLayout
-        android:id="@+id/chaptersLiberII"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@id/chaptersLiberAlVelLegis"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:visibility="gone" />
-
-    <LinearLayout
-        android:id="@+id/chaptersLiberTzaddi"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@id/chaptersLiberII"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:visibility="gone" />
-
-    <LinearLayout
         android:id="@+id/versesContainer"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@id/chaptersLiberTzaddi"
+        app:layout_constraintTop_toBottomOf="@id/chaptersContainer"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:visibility="gone" />
