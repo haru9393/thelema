@@ -18,30 +18,13 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.8" />
 
-    <Button
-        android:id="@+id/buttonOraciones"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:padding="8dp"
-        android:textSize="14sp"
-        android:text="@string/oraciones_corto"
-        android:textAllCaps="false"
-        android:background="@drawable/boton_thelema"
-        android:textColor="@color/thelema_dorado"
-        android:contentDescription="@string/descriptive_text_for_screen_reader"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/guideline_start"
-        app:layout_constraintEnd_toStartOf="@+id/guideline_end" />
-
     <TextView
         android:id="@+id/textViewOracionesRituales"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="@string/oraciones_y_rituales"
-        app:layout_constraintTop_toBottomOf="@+id/buttonOraciones"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"  app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <Button

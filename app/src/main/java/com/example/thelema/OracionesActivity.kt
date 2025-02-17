@@ -1,17 +1,16 @@
 package com.example.thelema
 
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.ScrollView
 import android.widget.TextView
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 
 class OracionesActivity : AppCompatActivity() {
 
-    // Lista de oraciones y rituales
     private val oraciones = listOf(
         Pair("Oración a Nuit", """
         Oh Nuit, vasto y eterno misterio,  
@@ -101,31 +100,32 @@ class OracionesActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_oraciones)
 
-        // Habilitar el botón de regresar en el ActionBar
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        // Referencia a los elementos del layout
         val scrollViewContenido = findViewById<ScrollView>(R.id.scrollViewContenido)
         val contenidoContainer: LinearLayout = findViewById(R.id.contenidoContainer)
 
-        // Agregar Log para depuración
         Log.d("OracionesActivity", "Contenido container: $contenidoContainer")
 
-        // Asegurarse de que el ScrollView y el LinearLayout estén visibles
-        if (scrollViewContenido.visibility == View.GONE) {
-            scrollViewContenido.visibility = View.VISIBLE
+        // Inicialmente ocultamos el ScrollView
+        scrollViewContenido.visibility = View.GONE
+
+        showOraciones(oraciones)
+
+        // Buscamos el botón "Regresar" y le añadimos el listener
+        val botonRegresar = findViewById<TextView>(R.id.buttonRegresar)
+        botonRegresar.setOnClickListener {
+            finish()
         }
 
-        // Llamamos a showOraciones para cargar las oraciones en el contenedor
-        showOraciones(oraciones)
+        // Mostrar el ScrollView cuando se cargan las oraciones
+        scrollViewContenido.visibility = View.VISIBLE
     }
 
     private fun showOraciones(oraciones: List<Pair<String, String>>) {
-        // Limpiar cualquier vista previa
         val contenidoContainer: LinearLayout = findViewById(R.id.contenidoContainer)
         contenidoContainer.removeAllViews()
 
-        // Añadir los textos de las oraciones
         for ((titulo, texto) in oraciones) {
             val tituloTextView = TextView(this).apply {
                 text = titulo
@@ -137,10 +137,9 @@ class OracionesActivity : AppCompatActivity() {
                 text = texto
                 textSize = 16f
                 setPadding(0, 8, 0, 8)
-                visibility = View.GONE  // Inicialmente está oculto
+                visibility = View.GONE
             }
 
-            // Acción al hacer clic en el título para mostrar/ocultar el contenido
             tituloTextView.setOnClickListener {
                 contenidoTextView.visibility = if (contenidoTextView.visibility == View.GONE) {
                     View.VISIBLE
@@ -149,17 +148,15 @@ class OracionesActivity : AppCompatActivity() {
                 }
             }
 
-            // Agregar ambos TextViews al LinearLayout
             contenidoContainer.addView(tituloTextView)
             contenidoContainer.addView(contenidoTextView)
         }
     }
 
-    // Sobrescribir la función onOptionsItemSelected para manejar el botón de regreso
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             android.R.id.home -> {
-                finish()  // Cierra la actividad y vuelve a la anterior
+                finish()
                 true
             }
             else -> super.onOptionsItemSelected(item)
