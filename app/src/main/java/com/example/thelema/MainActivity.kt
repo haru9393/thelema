@@ -209,12 +209,26 @@ class MainActivity : AppCompatActivity() {
         versesContainer.removeAllViews()
 
         bookContentData[bookName]?.get(chapterName)?.forEach { (verse, content) ->
-            val verseButton = Button(this) // Create the button *first*
-            verseButton.text = verse       // Then set its properties
+            val verseLayout = LinearLayout(this) // New layout for each verse
+            verseLayout.orientation = LinearLayout.VERTICAL // Arrange button and text vertically
+
+            val verseButton = Button(this)
+            verseButton.text = verse
             verseButton.setBackgroundResource(R.drawable.boton_thelema)
             verseButton.setTextColor(ContextCompat.getColor(this, R.color.thelema_dorado))
-            verseButton.setOnClickListener { verseTextView.text = content }
-            versesContainer.addView(verseButton) // Finally, add it to the container
+            verseLayout.addView(verseButton) // Add button to the verse layout
+
+            val verseText = TextView(this)
+            verseText.text = content
+            verseText.setTextColor(Color.BLACK) // Or your desired color
+            verseText.textSize = 16f // Or your desired size
+            verseLayout.addView(verseText) // Add text view to the verse layout
+
+            versesContainer.addView(verseLayout) // Add the verse layout to the main container
+
+            verseButton.setOnClickListener {
+                // No need to set verseTextView.text here anymore
+                // It's already in the layout
+            }
         }
-    }
-}
+    } }
