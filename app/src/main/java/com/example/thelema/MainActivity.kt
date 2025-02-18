@@ -1,4 +1,4 @@
-package com.example.thelema
+package com.example.thelema // Reemplaza con el nombre de tu paquete
 
 import android.content.Intent
 import android.os.Bundle
@@ -11,8 +11,6 @@ import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
 
-    // Declaración de variables para las vistas
-    private lateinit var buttonBack: Button  // Declare at class level
     private lateinit var chaptersContainer: LinearLayout
     private lateinit var chapterTitleTextView: TextView
     private lateinit var verseTextView: TextView
@@ -20,8 +18,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var chaptersScrollView: ScrollView
     private lateinit var versesScrollView: ScrollView
     private lateinit var buttonsContainer: LinearLayout
+    private lateinit var buttonBack: Button
 
-    // Constantes para los nombres de los libros
     companion object {
         const val LIBER_AL_VEL_LEGIS = "Liber AL vel Legis"
         const val LIBER_II = "Liber II"
