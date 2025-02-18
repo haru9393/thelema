@@ -4,6 +4,7 @@
     <color name="thelema_blanco">#FFFFFF</color>
     <color name="thelema_escarlata">#FF2400</color>
     <color name="thelema_gris">#808080</color>
+    <color name="black">#000000</color>
     <!-- Color dorado más oscuro -->
     <color name="thelema_dorado_oscuro">#C69C6D</color>
 

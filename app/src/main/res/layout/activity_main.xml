@@ -4,7 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- Container for buttons -->
     <LinearLayout
         android:id="@+id/buttonsContainer"
         android:layout_width="0dp"
@@ -16,97 +15,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
-        <!-- Buttons for books -->
-        <Button
-            android:id="@+id/buttonLiberAlVelLegis"
-            style="?android:attr/buttonBarButtonStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:background="@drawable/boton_thelema"
-            android:contentDescription="@string/button_liber_al_vel_legis"
-            android:minWidth="120dp"
-            android:maxWidth="180dp"
-            android:padding="12dp"
-            android:text="@string/button_liber_al_vel_legis"
-            android:textColor="@color/thelema_dorado" />
-
-        <Button
-            android:id="@+id/buttonLiberII"
-            style="?android:attr/buttonBarButtonStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:background="@drawable/boton_thelema"
-            android:contentDescription="@string/button_liber_ii"
-            android:minWidth="120dp"
-            android:maxWidth="180dp"
-            android:padding="12dp"
-            android:text="@string/button_liber_ii"
-            android:textColor="@color/thelema_dorado" />
-
-        <Button
-            android:id="@+id/buttonLiberTzaddi"
-            style="?android:attr/buttonBarButtonStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:background="@drawable/boton_thelema"
-            android:contentDescription="@string/button_liber_tzaddi"
-            android:minWidth="120dp"
-            android:maxWidth="180dp"
-            android:padding="12dp"
-            android:text="@string/button_liber_tzaddi"
-            android:textColor="@color/thelema_dorado" />
-
-        <Button
-            android:id="@+id/buttonOraciones"
-            style="?android:attr/buttonBarButtonStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:background="@drawable/boton_thelema"
-            android:contentDescription="@string/button_oraciones"
-            android:minWidth="120dp"
-            android:maxWidth="180dp"
-            android:padding="12dp"
-            android:text="@string/button_oraciones"
-            android:textColor="@color/thelema_dorado" />
-
-        <Button
-            android:id="@+id/buttonPreguntas"
-            style="?android:attr/buttonBarButtonStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:background="@drawable/boton_thelema"
-            android:contentDescription="@string/button_preguntas"
-            android:minWidth="120dp"
-            android:maxWidth="180dp"
-            android:padding="12dp"
-            android:text="@string/button_preguntas"
-            android:textColor="@color/thelema_dorado" />
-
-        <Button
-            android:id="@+id/buttonThemes"
-            style="?android:attr/buttonBarButtonStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:background="@drawable/boton_thelema"
-            android:contentDescription="@string/button_themes"
-            android:minWidth="120dp"
-            android:maxWidth="180dp"
-            android:padding="12dp"
-            android:text="@string/button_themes"
-            android:textColor="@color/thelema_dorado" />
-
     </LinearLayout>
 
-    <!-- Scroll Views for chapters and verses -->
     <ScrollView
         android:id="@+id/chaptersScrollView"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="0dp"
         android:visibility="gone"
         app:layout_constraintTop_toBottomOf="@id/buttonsContainer"
@@ -124,13 +37,13 @@
 
     <ScrollView
         android:id="@+id/versesScrollView"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="0dp"
         android:visibility="gone"
         app:layout_constraintTop_toBottomOf="@id/chaptersScrollView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/buttonsContainer">
+        app:layout_constraintBottom_toTopOf="@id/buttonBack">
 
         <LinearLayout
             android:id="@+id/versesContainer"
@@ -140,7 +53,6 @@
             android:padding="16dp" />
     </ScrollView>
 
-    <!-- TextViews for displaying chapter and verse information -->
     <TextView
         android:id="@+id/chapterTitleTextView"
         android:layout_width="wrap_content"
@@ -148,22 +60,22 @@
         android:visibility="gone"
         android:layout_margin="16dp"
         android:textSize="18sp"
-        android:textColor="@color/thelema_dorado"
+        android:textColor="@color/black"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/verseTextView"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:visibility="gone"
         android:layout_margin="16dp"
         android:textSize="16sp"
-        android:textColor="@color/thelema_dorado"
+        android:textColor="@color/black"
         app:layout_constraintTop_toBottomOf="@id/chapterTitleTextView"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Button for navigation -->
     <Button
         android:id="@+id/buttonBack"
         android:layout_width="wrap_content"
@@ -171,11 +83,8 @@
         android:layout_margin="16dp"
         android:text="@string/button_back"
         android:visibility="gone"
-        android:textColor="@color/thelema_dorado"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
-

@@ -1,5 +1,6 @@
-package com.example.thelema // Reemplaza con el nombre de tu paquete
+package com.example.thelema
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
@@ -7,26 +8,28 @@ import android.widget.LinearLayout
 import android.widget.ScrollView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 
 class MainActivity : AppCompatActivity() {
 
+    private lateinit var buttonsContainer: LinearLayout
     private lateinit var chaptersContainer: LinearLayout
     private lateinit var chapterTitleTextView: TextView
     private lateinit var verseTextView: TextView
     private lateinit var versesContainer: LinearLayout
     private lateinit var chaptersScrollView: ScrollView
     private lateinit var versesScrollView: ScrollView
-    private lateinit var buttonsContainer: LinearLayout
     private lateinit var buttonBack: Button
 
     companion object {
-        const val LIBER_AL_VEL_LEGIS = "Liber AL vel Legis"
-        const val LIBER_II = "Liber II"
-        const val LIBER_TZADDI = "Liber Tzaddi"
+        const val LIBER_AL_VEL_LEGIS = "LIBER_AL_VEL_LEGIS"
+        const val LIBER_II = "LIBER_II"
+        const val LIBER_TZADDI = "LIBER_TZADDI"
+        // TODO: Añade aquí los nombres de tus libros
     }
 
     private val bookContentData: Map<String, Map<String, Map<String, String>>> = mapOf(
-        LIBER_AL_VEL_LEGIS to mapOf(
+        "LIBER_AL_VEL_LEGIS" to mapOf(
             "Capítulo 1" to mapOf(
                 "Versículo 1" to "La Ley es para todos. Haz lo que tú quieras será toda la Ley.",
                 "Versículo 2" to "No hay más que una ley: la ley de la libertad.",
@@ -60,7 +63,7 @@ class MainActivity : AppCompatActivity() {
                 "Versículo 6" to "El hombre es el creador de su propio destino."
             )
         ),
-        LIBER_II to mapOf(
+        "LIBER_II" to mapOf(
             "Capítulo 1" to mapOf(
                 "Versículo 1" to "La sabiduría es un camino largo, pero vale la pena.",
                 "Versículo 2" to "Haz lo que es correcto, no lo que es fácil.",
@@ -90,7 +93,7 @@ class MainActivity : AppCompatActivity() {
                 "Versículo 5" to "El universo responde a aquellos que siguen su voluntad."
             )
         ),
-        LIBER_TZADDI to mapOf(
+        "LIBER_TZADDI" to mapOf(
             "Capítulo 1" to mapOf(
                 "Versículo 1" to "Recuerda, la verdad siempre está en tu interior.",
                 "Versículo 2" to "La fe es el puente entre el conocimiento y la acción.",
@@ -121,77 +124,97 @@ class MainActivity : AppCompatActivity() {
             )
         )
     )
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // Inicializa las vistas
+        // Inicialización de vistas
+        buttonsContainer = findViewById(R.id.buttonsContainer)
         chaptersContainer = findViewById(R.id.chaptersContainer)
         chapterTitleTextView = findViewById(R.id.chapterTitleTextView)
         verseTextView = findViewById(R.id.verseTextView)
         versesContainer = findViewById(R.id.versesContainer)
         chaptersScrollView = findViewById(R.id.chaptersScrollView)
         versesScrollView = findViewById(R.id.versesScrollView)
-        buttonsContainer = findViewById(R.id.buttonsContainer)
         buttonBack = findViewById(R.id.buttonBack)
 
-        // Botones
-        val buttonLiberAlVelLegis = findViewById<Button>(R.id.buttonLiberAlVelLegis)
-        val buttonLiberII = findViewById<Button>(R.id.buttonLiberII)
-        val buttonLiberTzaddi = findViewById<Button>(R.id.buttonLiberTzaddi)
+        // Crear botones de libros dinámicamente
+        val bookNames = listOf(LIBER_AL_VEL_LEGIS, LIBER_II, LIBER_TZADDI, "Oraciones", "Preguntas", "Temas") // TODO: Añade aquí los nombres de tus libros
+        bookNames.forEach { bookName ->
+            val button = Button(this) // Create the button *first*
+            button.text = bookName       // Then set its properties
+            button.setBackgroundResource(R.drawable.boton_thelema)
+            button.setTextColor(ContextCompat.getColor(this, R.color.thelema_dorado))
+            button.layoutParams = LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+            ).apply {
+                setMargins(8, 8, 8, 8)
+            }
+            button.setOnClickListener { showChapters(bookName) }
+            buttonsContainer.addView(button) // Finally, add it to the container
+        }
 
-        buttonLiberAlVelLegis.setOnClickListener { showChapters("Liber AL vel Legis") }
-        buttonLiberII.setOnClickListener { showChapters("Liber II") }
-        buttonLiberTzaddi.setOnClickListener { showChapters("Liber Tzaddi") }
+        buttonBack.setOnClickListener { showBooks() }
 
-        // Mostrar los libros al inicio
-        showBooks()
+        showBooks() // Mostrar libros al inicio
     }
 
     private fun showBooks() {
         buttonsContainer.visibility = View.VISIBLE
         chaptersScrollView.visibility = View.GONE
         versesScrollView.visibility = View.GONE
+        chapterTitleTextView.visibility = View.GONE
+        verseTextView.visibility = View.GONE
         buttonBack.visibility = View.GONE
     }
 
     private fun showChapters(bookName: String) {
-        chaptersContainer.removeAllViews()
         buttonsContainer.visibility = View.GONE
-        buttonBack.visibility = View.VISIBLE
-        chapterTitleTextView.visibility = View.VISIBLE
+        chaptersScrollView.visibility = View.VISIBLE
         versesScrollView.visibility = View.GONE
+        chapterTitleTextView.visibility = View.VISIBLE
+        verseTextView.visibility = View.GONE
+        buttonBack.visibility = View.VISIBLE
+
+        chapterTitleTextView.text = bookName
+        chapterTitleTextView.setTextColor(Color.BLACK)
+
+        chaptersContainer.removeAllViews()
 
         val chapterList = bookContentData[bookName]?.keys?.toList() ?: emptyList()
-        if (chapterList.isNotEmpty()) {
-            chapterTitleTextView.text = getString(R.string.chapter_title, bookName)
-        }
 
         chapterList.forEach { chapter ->
-            val chapterButton = Button(this).apply {
-                text = chapter
-                setOnClickListener { showVerses(bookName, chapter) }
-            }
-            chaptersContainer.addView(chapterButton)
+            val chapterButton = Button(this) // Create the button *first*
+            chapterButton.text = chapter       // Then set its properties
+            chapterButton.setBackgroundResource(R.drawable.boton_thelema)
+            chapterButton.setTextColor(ContextCompat.getColor(this, R.color.thelema_dorado))
+            chapterButton.setOnClickListener { showVerses(bookName, chapter) }
+            chaptersContainer.addView(chapterButton) // Finally, add it to the container
         }
-
-        chaptersScrollView.visibility = View.VISIBLE
     }
 
     private fun showVerses(bookName: String, chapterName: String) {
         chaptersScrollView.visibility = View.GONE
         versesScrollView.visibility = View.VISIBLE
-        val chapterTitle = getString(R.string.chapter_title, chapterName)
-        chapterTitleTextView.text = chapterTitle
+        chapterTitleTextView.visibility = View.VISIBLE
+        verseTextView.visibility = View.VISIBLE
+        buttonBack.visibility = View.VISIBLE
+
+        chapterTitleTextView.text = chapterName
+        chapterTitleTextView.setTextColor(Color.BLACK)
+
         versesContainer.removeAllViews()
 
         bookContentData[bookName]?.get(chapterName)?.forEach { (verse, content) ->
-            val verseButton = Button(this).apply {
-                text = getString(R.string.verse_title, verse, content)
-                setOnClickListener {
-                    verseTextView.text = content
-                }
-            }
-            versesContainer.addView(verseButton)
+            val verseButton = Button(this) // Create the button *first*
+            verseButton.text = verse       // Then set its properties
+            verseButton.setBackgroundResource(R.drawable.boton_thelema)
+            verseButton.setTextColor(ContextCompat.getColor(this, R.color.thelema_dorado))
+            verseButton.setOnClickListener { verseTextView.text = content }
+            versesContainer.addView(verseButton) // Finally, add it to the container
         }
-    } }
+    }
+}
