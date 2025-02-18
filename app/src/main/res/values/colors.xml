@@ -4,5 +4,10 @@
     <color name="thelema_blanco">#FFFFFF</color>
     <color name="thelema_escarlata">#FF2400</color>
     <color name="thelema_gris">#808080</color>
+    <!-- Color dorado más oscuro -->
+    <color name="thelema_dorado_oscuro">#C69C6D</color>
+
+    <!-- Fondo oscuro para los botones -->
+    <color name="boton_fondo">#2C2C2C</color>
 </resources>
 

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:gravity="center">
+
+    <!-- Botón para Liber LXV -->
+    <Button
+        android:id="@+id/btnLiberLXV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/liber_lxv"
+        android:textColor="@color/thelema_dorado_oscuro"
+        android:background="@color/boton_fondo" />
+
+    <!-- Botón para Liber VII -->
+    <Button
+        android:id="@+id/btnLiberVII"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/liber_vii"
+        android:textColor="@color/thelema_dorado_oscuro"
+        android:background="@color/boton_fondo" />
+
+    <!-- Botón para Liber Samekh -->
+    <Button
+        android:id="@+id/btnLiberSamekh"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/liber_samekh"
+        android:textColor="@color/thelema_dorado_oscuro"
+        android:background="@color/boton_fondo" />
+
+    <!-- Botón para Liber V vel Reguli -->
+    <Button
+        android:id="@+id/btnLiberV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/liber_v"
+        android:textColor="@color/thelema_dorado_oscuro"
+        android:background="@color/boton_fondo" />
+
+</LinearLayout>
+

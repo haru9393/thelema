@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- Título o texto relacionado con Liber V -->
+    <TextView
+        android:id="@+id/textLiberV"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/liber_v_title" /> <!-- Reemplaza con el recurso -->
+
+    <!-- Otros elementos que quieras agregar pueden ir aquí -->
+</LinearLayout>

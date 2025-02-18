@@ -48,9 +48,31 @@
             android:name=".DetalleOracionActivity"
             android:exported="true"/>
 
-        <activity android:name=".PreguntasFrecuentesActivity"
-            android:exported="true">
-        </activity>
+        <activity
+            android:name=".PreguntasFrecuentesActivity"
+            android:exported="true"/>
+
+        <!-- Aquí agregas las actividades faltantes -->
+        <activity
+            android:name=".LiberLXVActivity"
+            android:exported="true"/>
+
+        <activity
+            android:name=".LiberSamekhActivity"
+            android:exported="true"/>
+
+        <activity
+            android:name=".LiberVActivity"
+            android:exported="true"/>
+
+        <activity
+            android:name=".LiberVIIActivity"
+            android:exported="true"/>
+
+        <!-- Aquí está la actividad OtherBooksActivity -->
+        <activity
+            android:name=".OtherBooksActivity"
+            android:exported="true" />
 
         <provider
             android:name="androidx.core.content.FileProvider"

@@ -99,6 +99,23 @@
     <string name="share">Compartir</string>
     <string name="chapter_title_format">%1$s%n%2$s</string>
     <string name="back_button_description">Atrás</string>
+    <string name="liber_lxv">Liber LXV</string>
+    <string name="liber_vii">Liber VII</string>
+    <string name="liber_samekh">Liber Samekh</string>
+    <string name="liber_v">Liber V vel Reguli</string>
+    <string name="liber_vii_title">Liber VII</string>
+    <string name="liber_samekh_title">Liber Samekh</string>
+    <string name="libervii_title">Liber VII</string>
+    <string name="liber_v_title">Liber V</string>
+    <string name="liber_vii_content">Contenido de Liber VII</string>
+    <!-- Nuevas cadenas para los botones de los libros -->
+    <string name="button_liber_lxv">Liber LXV</string>
+    <string name="button_liber_samekh">Liber Samekh</string>
+    <string name="button_liber_v">Liber V vel Reguli</string>
+    <string name="button_liber_vii">Liber VII</string>
+    <string name="button_otros_libros">Otros Libros</string>
+    <string name="button_back">button_back</string>
+    <string name="contenido_de_liber_lxv">Contenido de Liber LXV</string>
 
 
 </resources>
