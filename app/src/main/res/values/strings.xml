@@ -98,6 +98,7 @@
     <string name="back">Regresar</string>
     <string name="share">Compartir</string>
     <string name="chapter_title_format">%1$s%n%2$s</string>
+    <string name="back_button_description">Atrás</string>
 
 
 </resources>
